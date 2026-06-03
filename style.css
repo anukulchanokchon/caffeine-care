@@ -1,0 +1,584 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+
+  --cream:#F8F6F1;
+  --light-green:#DCE8D5;
+  --green:#5B8C5A;
+  --dark-green:#2F5D50;
+  --white:#FFFFFF;
+  --text:#333333;
+  --shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+body{
+
+  background:var(--cream);
+  font-family:
+  "Segoe UI",
+  sans-serif;
+
+  color:var(--text);
+
+}
+
+.screen{
+
+  max-width:430px;
+  margin:auto;
+  min-height:100vh;
+
+  padding:24px;
+
+}
+
+.logo{
+
+  font-size:70px;
+  text-align:center;
+
+  margin-top:20px;
+
+}
+
+.hero-icon{
+
+  font-size:90px;
+  text-align:center;
+
+  margin:20px 0;
+
+}
+
+h1{
+
+  text-align:center;
+  color:var(--dark-green);
+
+}
+
+h2{
+
+  color:var(--dark-green);
+  margin-bottom:16px;
+
+}
+
+h3{
+
+  color:var(--dark-green);
+
+}
+
+.subtitle{
+
+  text-align:center;
+  color:#666;
+
+  margin-top:10px;
+  margin-bottom:20px;
+
+  line-height:1.6;
+
+}
+
+.feature-card{
+
+  background:var(--white);
+
+  border-radius:18px;
+
+  padding:18px;
+
+  margin:20px 0;
+
+  box-shadow:var(--shadow);
+
+}
+
+.feature-card p{
+
+  margin:10px 0;
+
+}
+
+.divider{
+
+  height:1px;
+
+  background:#ddd;
+
+  margin:25px 0;
+
+}
+
+.login-text{
+
+  text-align:center;
+  margin-bottom:10px;
+
+}
+
+label{
+
+  display:block;
+
+  margin-top:16px;
+  margin-bottom:8px;
+
+  font-weight:600;
+
+}
+
+input,
+textarea{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #ddd;
+
+  border-radius:14px;
+
+  background:white;
+
+  font-size:15px;
+
+}
+
+textarea{
+
+  min-height:100px;
+
+  resize:none;
+
+}
+
+button{
+
+  cursor:pointer;
+  border:none;
+
+  font-size:15px;
+
+  transition:.2s;
+
+}
+
+button:hover{
+
+  transform:translateY(-1px);
+
+}
+
+.primary{
+
+  width:100%;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  background:var(--green);
+
+  color:white;
+
+  margin-top:16px;
+
+}
+
+.secondary{
+
+  width:100%;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  background:white;
+
+  border:1px solid #ddd;
+
+  margin-top:12px;
+
+}
+
+/* =========================
+REGISTER
+========================= */
+
+.gender-grid,
+.frequency-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+}
+
+.gender-btn,
+.freq-btn{
+
+  padding:14px;
+
+  border-radius:14px;
+
+  background:white;
+
+  border:1px solid #ddd;
+
+}
+
+.gender-btn.active,
+.freq-btn.active{
+
+  background:var(--green);
+
+  color:white;
+
+  border-color:var(--green);
+
+}
+
+#errorMsg{
+
+  color:#d32f2f;
+
+  text-align:center;
+
+  margin-top:12px;
+
+  min-height:20px;
+
+}
+
+
+/* =========================
+CARD
+========================= */
+
+.card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  margin-top:16px;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+/* =========================
+PROGRESS
+========================= */
+
+.progress{
+
+  width:100%;
+
+  height:14px;
+
+  background:#ececec;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  margin:16px 0;
+
+}
+
+.progress-fill{
+
+  width:0%;
+
+  height:100%;
+
+  background:var(--green);
+
+  transition:.4s;
+
+}
+
+#dailyTotal{
+
+  color:var(--green);
+
+  text-align:center;
+
+  margin-top:10px;
+
+}
+
+#progressText{
+
+  text-align:center;
+
+  color:#666;
+
+}
+
+#riskLevel{
+
+  text-align:center;
+
+  margin-top:10px;
+
+}
+
+#riskDescription{
+
+  text-align:center;
+
+  color:#666;
+
+  margin-top:8px;
+
+}
+
+
+/* =========================
+DASHBOARD
+========================= */
+
+.dashboard-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:14px;
+
+  margin-top:20px;
+
+}
+
+.dashboard-btn{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:25px 10px;
+
+  box-shadow:var(--shadow);
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  font-size:30px;
+
+}
+
+.dashboard-btn span{
+
+  font-size:15px;
+
+  color:var(--text);
+
+}
+
+
+/* =========================
+ASSESSMENT
+========================= */
+
+.drink-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:12px;
+
+  margin-top:20px;
+
+}
+
+.drink-btn{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  min-height:120px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:8px;
+
+  box-shadow:var(--shadow);
+
+}
+
+.drink-btn.active{
+
+  background:var(--green);
+
+  color:white;
+
+}
+
+.drink-btn small{
+
+  opacity:.8;
+
+}
+
+
+/* =========================
+RESULT
+========================= */
+
+.result-card{
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:24px;
+
+  margin-top:20px;
+
+  text-align:center;
+
+  box-shadow:var(--shadow);
+
+}
+
+.result-drink{
+
+  font-size:22px;
+
+  font-weight:bold;
+
+}
+
+.result-caffeine{
+
+  font-size:48px;
+
+  color:var(--green);
+
+  margin-top:15px;
+
+}
+
+#resultRisk{
+
+  text-align:center;
+
+}
+
+#resultAdvice{
+
+  text-align:center;
+
+  color:#666;
+
+  margin-top:10px;
+
+}
+
+
+/* =========================
+AI
+========================= */
+
+#aiAnswer{
+
+  margin-top:15px;
+
+  min-height:80px;
+
+}
+
+
+/* =========================
+HISTORY
+========================= */
+
+#historyList{
+
+  margin-top:15px;
+
+}
+
+.history-item{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  margin-bottom:12px;
+
+  box-shadow:var(--shadow);
+
+}
+
+
+/* =========================
+KNOWLEDGE
+========================= */
+
+#knowledgeScreen .card{
+
+  margin-bottom:14px;
+
+}
+
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:480px){
+
+  .screen{
+
+    padding:20px;
+
+  }
+
+  .drink-grid{
+
+    grid-template-columns:
+    1fr;
+
+  }
+
+}

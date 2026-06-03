@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>03</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- =========================
+CAFFEINE CARE V3
+PAGE 1 : WELCOME
+========================= -->
+
+<div id="welcome" class="screen">
+
+  <div class="logo">🌿</div>
+
+  <h1>Caffeine Care</h1>
+
+  <p class="subtitle">
+    รู้ทันคาเฟอีนก่อนกระทบสุขภาพ
+  </p>
+
+  <div class="hero-icon">☕</div>
+
+  <div class="feature-card">
+    <p>✓ ประเมินการบริโภคคาเฟอีน</p>
+    <p>✓ ติดตามคาเฟอีนสะสมรายวัน</p>
+    <p>✓ รับคำแนะนำเฉพาะบุคคล</p>
+  </div>
+
+  <button id="goRegister" class="primary">
+    เริ่มต้นใช้งาน
+  </button>
+
+  <div class="divider"></div>
+
+  <p class="login-text">
+    เคยใช้งานแล้ว?
+  </p>
+
+  <button id="quickLogin" class="secondary">
+    เข้าสู่ระบบทันที
+  </button>
+
+</div>
+
+
+<!-- =========================
+PAGE 2 : REGISTER
+========================= -->
+
+<div id="register"
+     class="screen"
+     style="display:none;">
+
+  <h2>สร้างโปรไฟล์</h2>
+
+  <label>ชื่อ</label>
+
+  <input
+    id="userName"
+    type="text"
+    placeholder="กรอกชื่อ">
+
+  <label>อายุ</label>
+
+  <input
+    id="userAge"
+    type="number"
+    placeholder="กรอกอายุ">
+
+  <label>เพศ</label>
+
+  <div class="gender-grid">
+
+    <button
+      type="button"
+      class="gender-btn">
+
+      👨 ชาย
+
+    </button>
+
+    <button
+      type="button"
+      class="gender-btn">
+
+      👩 หญิง
+
+    </button>
+
+    <button
+      type="button"
+      class="gender-btn">
+
+      🌈 ไม่ระบุ
+
+    </button>
+
+  </div>
+
+  <label>น้ำหนัก (kg)</label>
+
+  <input
+    id="userWeight"
+    type="number"
+    placeholder="กรอกน้ำหนัก">
+
+  <label>
+    ความถี่การดื่มคาเฟอีน
+  </label>
+
+  <div class="frequency-grid">
+
+    <button
+      type="button"
+      class="freq-btn">
+
+      ทุกวัน
+
+    </button>
+
+    <button
+      type="button"
+      class="freq-btn">
+
+      3-4 วัน/สัปดาห์
+
+    </button>
+
+    <button
+      type="button"
+      class="freq-btn">
+
+      1-2 วัน/สัปดาห์
+
+    </button>
+
+    <button
+      type="button"
+      class="freq-btn">
+
+      ไม่ดื่มประจำ
+
+    </button>
+
+  </div>
+
+  <label>
+    โรคประจำตัว (ถ้ามี)
+  </label>
+
+  <textarea
+    id="medical"
+    placeholder="เช่น ความดันโลหิตสูง"></textarea>
+
+  <p id="errorMsg"></p>
+
+  <button
+    id="createProfile"
+    class="primary">
+
+    สร้างโปรไฟล์
+
+  </button>
+
+</div>
+
+
+<!-- =========================
+PAGE 3 : DASHBOARD
+========================= -->
+
+<div id="dashboard"
+     class="screen"
+     style="display:none;">
+
+  <h2 id="welcomeName">
+    สวัสดี 👋
+  </h2>
+
+  <div class="card">
+
+    <h3>
+      คาเฟอีนสะสมวันนี้
+    </h3>
+
+    <h1 id="dailyTotal">
+      0 / 400 mg
+    </h1>
+
+    <div class="progress">
+
+      <div
+        id="progressBar"
+        class="progress-fill">
+      </div>
+
+    </div>
+
+    <p id="progressText">
+      0%
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h3>
+      ระดับความเสี่ยง
+    </h3>
+
+    <h2 id="riskLevel">
+      ยังไม่มีข้อมูล
+    </h2>
+
+    <p id="riskDescription">
+      กรุณาประเมินเครื่องดื่มก่อน
+    </p>
+
+  </div>
+
+  <div class="dashboard-grid">
+
+    <button
+      id="goAssessment"
+      class="dashboard-btn">
+
+      ☕
+      <span>ประเมิน</span>
+
+    </button>
+
+    <button
+      id="goAI"
+      class="dashboard-btn">
+
+      🤖
+      <span>AI</span>
+
+    </button>
+
+    <button
+      id="goHistory"
+      class="dashboard-btn">
+
+      📖
+      <span>ประวัติ</span>
+
+    </button>
+
+    <button
+      id="goKnowledge"
+      class="dashboard-btn">
+
+      📚
+      <span>ความรู้</span>
+
+    </button>
+
+  </div>
+
+</div>
+
+<!-- =========================
+PAGE 4 : ASSESSMENT
+========================= -->
+
+<div id="assessment"
+     class="screen"
+     style="display:none;">
+
+  <h2>ประเมินเครื่องดื่ม</h2>
+
+  <p class="subtitle">
+    เลือกเครื่องดื่มและจำนวนที่ดื่ม
+  </p>
+
+  <div class="drink-grid">
+
+    <button
+      class="drink-btn"
+      data-name="กาแฟ"
+      data-caffeine="95">
+
+      ☕
+      <strong>กาแฟ</strong>
+      <small>95 mg</small>
+
+    </button>
+
+    <button
+      class="drink-btn"
+      data-name="มัทฉะ"
+      data-caffeine="70">
+
+      🍵
+      <strong>มัทฉะ</strong>
+      <small>70 mg</small>
+
+    </button>
+
+    <button
+      class="drink-btn"
+      data-name="ชานม"
+      data-caffeine="50">
+
+      🧋
+      <strong>ชานม</strong>
+      <small>50 mg</small>
+
+    </button>
+
+    <button
+      class="drink-btn"
+      data-name="น้ำอัดลม"
+      data-caffeine="35">
+
+      🥤
+      <strong>น้ำอัดลม</strong>
+      <small>35 mg</small>
+
+    </button>
+
+    <button
+      class="drink-btn"
+      data-name="ชูกำลัง"
+      data-caffeine="80">
+
+      ⚡
+      <strong>ชูกำลัง</strong>
+      <small>80 mg</small>
+
+    </button>
+
+  </div>
+
+  <label>
+    จำนวนแก้ว
+  </label>
+
+  <input
+    id="cupCount"
+    type="number"
+    min="1"
+    value="1">
+
+  <button
+    id="calculateBtn"
+    class="primary">
+
+    ประเมินคาเฟอีน
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+PAGE 5 : RESULT
+========================= -->
+
+<div id="result"
+     class="screen"
+     style="display:none;">
+
+  <h2>ผลการประเมิน</h2>
+
+  <div class="result-card">
+
+    <div
+      id="drinkName"
+      class="result-drink">
+
+      -
+
+    </div>
+
+    <div
+      id="caffeineResult"
+      class="result-caffeine">
+
+      0 mg
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <h3>
+      ระดับความเสี่ยง
+    </h3>
+
+    <h2 id="resultRisk">
+      -
+    </h2>
+
+    <p id="resultAdvice">
+      -
+    </p>
+
+  </div>
+
+  <button
+    id="saveBtn"
+    class="primary">
+
+    บันทึก
+
+  </button>
+
+  <button
+    id="backDashboard"
+    class="secondary">
+
+    กลับ Dashboard
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+PAGE 6 : AI ASSISTANT
+========================= -->
+
+<div id="aiScreen"
+     class="screen"
+     style="display:none;">
+
+  <h2>🤖 AI Assistant</h2>
+
+  <div class="card">
+
+    <p id="aiAdvice">
+
+      วันนี้ยังไม่มีข้อมูล
+      กรุณาประเมินเครื่องดื่มก่อน
+
+    </p>
+
+  </div>
+
+  <textarea
+    id="aiQuestion"
+    placeholder="ถาม AI เพิ่มเติม..."></textarea>
+
+  <button
+    id="askAI"
+    class="primary">
+
+    ส่งคำถาม
+
+  </button>
+
+  <div
+    id="aiAnswer"
+    class="card">
+
+  </div>
+
+  <button
+    id="backDashboardAI"
+    class="secondary">
+
+    กลับ Dashboard
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+PAGE 7 : HISTORY
+========================= -->
+
+<div id="historyScreen"
+     class="screen"
+     style="display:none;">
+
+  <h2>📖 ประวัติการดื่ม</h2>
+
+  <div
+    id="historyList">
+
+  </div>
+
+  <button
+    id="backDashboardHistory"
+    class="secondary">
+
+    กลับ Dashboard
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+PAGE 8 : KNOWLEDGE
+========================= -->
+
+<div id="knowledgeScreen"
+     class="screen"
+     style="display:none;">
+
+  <h2>📚 ความรู้เรื่องคาเฟอีน</h2>
+
+  <div class="card">
+
+    <h3>คาเฟอีนคืออะไร?</h3>
+
+    <p>
+      คาเฟอีนเป็นสารกระตุ้น
+      ที่พบในกาแฟ ชา โกโก้
+      และเครื่องดื่มหลายชนิด
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h3>ปริมาณที่แนะนำ</h3>
+
+    <p>
+      ผู้ใหญ่ควรได้รับ
+      ไม่เกิน 400 mg ต่อวัน
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h3>ผลข้างเคียง</h3>
+
+    <p>
+      ใจสั่น นอนไม่หลับ
+      วิตกกังวล
+      และปวดศีรษะ
+    </p>
+
+  </div>
+
+  <div class="card">
+
+    <h3>คาเฟอีนในเครื่องดื่ม</h3>
+
+    <p>☕ กาแฟ 95 mg</p>
+    <p>🍵 มัทฉะ 70 mg</p>
+    <p>🧋 ชานม 50 mg</p>
+    <p>🥤 น้ำอัดลม 35 mg</p>
+    <p>⚡ ชูกำลัง 80 mg</p>
+
+  </div>
+
+  <button
+    id="backDashboardKnowledge"
+    class="secondary">
+
+    กลับ Dashboard
+
+  </button>
+
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>

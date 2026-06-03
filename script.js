@@ -1,0 +1,917 @@
+/* =========================
+CAFFEINE CARE V3
+========================= */
+
+const screens = {
+
+  welcome:
+    document.getElementById("welcome"),
+
+  register:
+    document.getElementById("register"),
+
+  dashboard:
+    document.getElementById("dashboard"),
+
+  assessment:
+    document.getElementById("assessment"),
+
+  result:
+    document.getElementById("result"),
+
+  ai:
+    document.getElementById("aiScreen"),
+
+  history:
+    document.getElementById("historyScreen"),
+
+  knowledge:
+    document.getElementById("knowledgeScreen")
+
+};
+
+function showScreen(screenName){
+
+  Object.values(screens)
+  .forEach(screen => {
+
+    screen.style.display = "none";
+
+  });
+
+  screens[screenName]
+  .style.display = "block";
+
+}
+
+
+/* =========================
+APP DATA
+========================= */
+
+let selectedDrink = null;
+
+let currentCaffeine = 0;
+
+let totalCaffeine = 0;
+
+let historyData = [];
+
+
+/* =========================
+WELCOME
+========================= */
+
+document
+.getElementById("goRegister")
+.addEventListener("click", () => {
+
+  showScreen("register");
+
+});
+
+
+document
+.getElementById("quickLogin")
+.addEventListener("click", () => {
+
+  const profile =
+    localStorage.getItem(
+      "userProfile"
+    );
+
+  if(!profile){
+
+    alert(
+      "ยังไม่พบบัญชีผู้ใช้ กรุณาสมัครสมาชิกก่อน"
+    );
+
+    return;
+
+  }
+
+  const user =
+    JSON.parse(profile);
+
+  document
+  .getElementById("welcomeName")
+  .innerText =
+  `สวัสดี ${user.name} 👋`;
+
+  showScreen("dashboard");
+
+});
+
+
+/* =========================
+GENDER
+========================= */
+
+document
+.querySelectorAll(".gender-btn")
+.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    document
+    .querySelectorAll(".gender-btn")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+    btn.classList.add(
+      "active"
+    );
+
+  });
+
+});
+
+
+/* =========================
+FREQUENCY
+========================= */
+
+document
+.querySelectorAll(".freq-btn")
+.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    document
+    .querySelectorAll(".freq-btn")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+    btn.classList.add(
+      "active"
+    );
+
+  });
+
+});
+
+
+/* =========================
+REGISTER
+========================= */
+
+document
+.getElementById("createProfile")
+.addEventListener("click", () => {
+
+  const name =
+    document
+    .getElementById(
+      "userName"
+    ).value;
+
+  const age =
+    document
+    .getElementById(
+      "userAge"
+    ).value;
+
+  const weight =
+    document
+    .getElementById(
+      "userWeight"
+    ).value;
+
+  const gender =
+    document
+    .querySelector(
+      ".gender-btn.active"
+    );
+
+  const frequency =
+    document
+    .querySelector(
+      ".freq-btn.active"
+    );
+
+  const medical =
+    document
+    .getElementById(
+      "medical"
+    ).value;
+
+  const error =
+    document
+    .getElementById(
+      "errorMsg"
+    );
+
+  if(
+    name === "" ||
+    age === "" ||
+    weight === "" ||
+    !gender ||
+    !frequency
+  ){
+
+    error.innerText =
+    "กรุณากรอกข้อมูลให้ครบทุกช่อง";
+
+    return;
+
+  }
+
+  error.innerText = "";
+
+  const profile = {
+
+    name,
+    age,
+    weight,
+
+    gender:
+      gender.innerText,
+
+    frequency:
+      frequency.innerText,
+
+    medical
+
+  };
+
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify(profile)
+  );
+
+  document
+  .getElementById(
+    "welcomeName"
+  ).innerText =
+  `สวัสดี ${name} 👋`;
+
+  showScreen(
+    "dashboard"
+  );
+
+});
+
+/* =========================
+DASHBOARD MENU
+========================= */
+
+document
+.getElementById("goAssessment")
+.addEventListener("click", () => {
+
+  showScreen("assessment");
+
+});
+
+
+document
+.getElementById("goAI")
+.addEventListener("click", () => {
+
+  updateAIAdvice();
+
+  showScreen("ai");
+
+});
+
+
+document
+.getElementById("goHistory")
+.addEventListener("click", () => {
+
+  renderHistory();
+
+  showScreen("history");
+
+});
+
+
+document
+.getElementById("goKnowledge")
+.addEventListener("click", () => {
+
+  showScreen("knowledge");
+
+});
+
+
+/* =========================
+DRINK SELECT
+========================= */
+
+document
+.querySelectorAll(".drink-btn")
+.forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    document
+    .querySelectorAll(".drink-btn")
+    .forEach(item => {
+
+      item.classList.remove(
+        "active"
+      );
+
+    });
+
+    btn.classList.add(
+      "active"
+    );
+
+    selectedDrink = btn;
+
+  });
+
+});
+
+
+/* =========================
+CALCULATE
+========================= */
+
+document
+.getElementById("calculateBtn")
+.addEventListener("click", () => {
+
+  if(!selectedDrink){
+
+    alert(
+      "กรุณาเลือกเครื่องดื่ม"
+    );
+
+    return;
+
+  }
+
+  const cups =
+    Number(
+      document
+      .getElementById(
+        "cupCount"
+      ).value
+    );
+
+  if(
+    !cups ||
+    cups < 1
+  ){
+
+    alert(
+      "กรุณากรอกจำนวนแก้ว"
+    );
+
+    return;
+
+  }
+
+  const caffeine =
+    Number(
+      selectedDrink.dataset.caffeine
+    );
+
+  currentCaffeine =
+    caffeine * cups;
+
+  document
+  .getElementById(
+    "drinkName"
+  ).innerText =
+  selectedDrink.dataset.name;
+
+  document
+  .getElementById(
+    "caffeineResult"
+  ).innerText =
+  currentCaffeine + " mg";
+
+  if(currentCaffeine <= 200){
+
+    document
+    .getElementById(
+      "resultRisk"
+    ).innerText =
+    "🟢 ความเสี่ยงต่ำ";
+
+    document
+    .getElementById(
+      "resultAdvice"
+    ).innerText =
+    "ยังอยู่ในช่วงที่ปลอดภัย";
+
+  }
+
+  else if(
+    currentCaffeine <= 400
+  ){
+
+    document
+    .getElementById(
+      "resultRisk"
+    ).innerText =
+    "🟡 ความเสี่ยงปานกลาง";
+
+    document
+    .getElementById(
+      "resultAdvice"
+    ).innerText =
+    "ควรหลีกเลี่ยงคาเฟอีนเพิ่ม";
+
+  }
+
+  else{
+
+    document
+    .getElementById(
+      "resultRisk"
+    ).innerText =
+    "🔴 ความเสี่ยงสูง";
+
+    document
+    .getElementById(
+      "resultAdvice"
+    ).innerText =
+    "คาเฟอีนเกินปริมาณที่แนะนำ";
+
+  }
+
+  showScreen(
+    "result"
+  );
+
+});
+
+
+/* =========================
+SAVE RESULT
+========================= */
+
+document
+.getElementById("saveBtn")
+.addEventListener("click", () => {
+
+  totalCaffeine +=
+    currentCaffeine;
+
+  const percent =
+    Math.min(
+      (
+        totalCaffeine / 400
+      ) * 100,
+      100
+    );
+
+  document
+  .getElementById(
+    "dailyTotal"
+  ).innerText =
+  totalCaffeine +
+  " / 400 mg";
+
+  document
+  .getElementById(
+    "progressBar"
+  ).style.width =
+  percent + "%";
+
+  document
+  .getElementById(
+    "progressText"
+  ).innerText =
+  Math.round(percent) +
+  "%";
+
+  updateRisk();
+
+  saveHistory();
+
+  showScreen(
+    "dashboard"
+  );
+
+});
+
+/* =========================
+UPDATE RISK
+========================= */
+
+function updateRisk(){
+
+  const riskLevel =
+    document.getElementById(
+      "riskLevel"
+    );
+
+  const riskDescription =
+    document.getElementById(
+      "riskDescription"
+    );
+
+  if(totalCaffeine <= 200){
+
+    riskLevel.innerText =
+    "🟢 ต่ำ";
+
+    riskDescription.innerText =
+    "ยังอยู่ในช่วงที่ปลอดภัย";
+
+  }
+
+  else if(
+    totalCaffeine <= 400
+  ){
+
+    riskLevel.innerText =
+    "🟡 ปานกลาง";
+
+    riskDescription.innerText =
+    "ควรระวังการบริโภคเพิ่ม";
+
+  }
+
+  else{
+
+    riskLevel.innerText =
+    "🔴 สูง";
+
+    riskDescription.innerText =
+    "คาเฟอีนเกินปริมาณที่แนะนำ";
+
+  }
+
+}
+
+
+/* =========================
+HISTORY
+========================= */
+
+function saveHistory(){
+
+  const item = {
+
+    drink:
+      document
+      .getElementById(
+        "drinkName"
+      ).innerText,
+
+    caffeine:
+      currentCaffeine,
+
+    date:
+      new Date()
+      .toLocaleString(
+        "th-TH"
+      )
+
+  };
+
+  historyData.push(item);
+
+  localStorage.setItem(
+    "caffeineHistory",
+    JSON.stringify(
+      historyData
+    )
+  );
+
+}
+
+
+function renderHistory(){
+
+  const container =
+    document
+    .getElementById(
+      "historyList"
+    );
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem(
+        "caffeineHistory"
+      )
+    ) || [];
+
+  container.innerHTML = "";
+
+  if(saved.length === 0){
+
+    container.innerHTML =
+    `
+    <div class="card">
+      ยังไม่มีประวัติ
+    </div>
+    `;
+
+    return;
+
+  }
+
+  saved
+  .slice()
+  .reverse()
+  .forEach(item => {
+
+    container.innerHTML +=
+    `
+    <div class="history-item">
+
+      <strong>
+        ${item.drink}
+      </strong>
+
+      <br>
+
+      ${item.caffeine} mg
+
+      <br>
+
+      <small>
+        ${item.date}
+      </small>
+
+    </div>
+    `;
+
+  });
+
+}
+
+
+/* =========================
+AI ASSISTANT
+========================= */
+
+function updateAIAdvice(){
+
+  const aiAdvice =
+    document
+    .getElementById(
+      "aiAdvice"
+    );
+
+  if(totalCaffeine <= 100){
+
+    aiAdvice.innerHTML =
+
+    `
+    วันนี้คุณได้รับ
+    ${totalCaffeine} mg
+
+    <br><br>
+
+    ✅ อยู่ในระดับต่ำ
+
+    <br>
+
+    สามารถดื่มเพิ่มได้
+    อย่างเหมาะสม
+    `;
+
+  }
+
+  else if(
+    totalCaffeine <= 250
+  ){
+
+    aiAdvice.innerHTML =
+
+    `
+    วันนี้คุณได้รับ
+    ${totalCaffeine} mg
+
+    <br><br>
+
+    🟢 อยู่ในเกณฑ์ปกติ
+
+    <br>
+
+    ควรดื่มน้ำเพิ่ม
+    ระหว่างวัน
+    `;
+
+  }
+
+  else if(
+    totalCaffeine <= 400
+  ){
+
+    aiAdvice.innerHTML =
+
+    `
+    วันนี้คุณได้รับ
+    ${totalCaffeine} mg
+
+    <br><br>
+
+    🟡 เริ่มเข้าใกล้
+    ขีดจำกัด
+
+    <br>
+
+    ควรหลีกเลี่ยง
+    คาเฟอีนเพิ่ม
+    ในช่วง 4-6 ชั่วโมง
+    ข้างหน้า
+    `;
+
+  }
+
+  else{
+
+    aiAdvice.innerHTML =
+
+    `
+    วันนี้คุณได้รับ
+    ${totalCaffeine} mg
+
+    <br><br>
+
+    🔴 เกินปริมาณ
+    ที่แนะนำ
+
+    <br>
+
+    ควรงดเครื่องดื่ม
+    ที่มีคาเฟอีน
+    เพิ่มเติม
+    `;
+
+  }
+
+}
+
+
+/* =========================
+AI CHAT
+========================= */
+
+document
+.getElementById("askAI")
+.addEventListener("click", () => {
+
+  const question =
+    document
+    .getElementById(
+      "aiQuestion"
+    ).value
+    .toLowerCase();
+
+  const answer =
+    document
+    .getElementById(
+      "aiAnswer"
+    );
+
+  if(question === ""){
+
+    answer.innerHTML =
+    "กรุณาพิมพ์คำถาม";
+
+    return;
+
+  }
+
+  if(
+    question.includes(
+      "นอน"
+    )
+  ){
+
+    answer.innerHTML =
+    "ควรหลีกเลี่ยงคาเฟอีนก่อนนอนอย่างน้อย 6 ชั่วโมง";
+
+  }
+
+  else if(
+    question.includes(
+      "กาแฟ"
+    )
+  ){
+
+    answer.innerHTML =
+    "กาแฟ 1 แก้วโดยเฉลี่ยมีคาเฟอีนประมาณ 95 mg";
+
+  }
+
+  else if(
+    question.includes(
+      "มัทฉะ"
+    )
+  ){
+
+    answer.innerHTML =
+    "มัทฉะ 1 แก้วมีคาเฟอีนประมาณ 70 mg";
+
+  }
+
+  else{
+
+    answer.innerHTML =
+    "AI ยังไม่มีข้อมูลสำหรับคำถามนี้";
+
+  }
+
+});
+
+
+/* =========================
+BACK BUTTONS
+========================= */
+
+document
+.getElementById(
+  "backDashboard"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    showScreen(
+      "dashboard"
+    );
+
+});
+
+document
+.getElementById(
+  "backDashboardAI"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    showScreen(
+      "dashboard"
+    );
+
+});
+
+document
+.getElementById(
+  "backDashboardHistory"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    showScreen(
+      "dashboard"
+    );
+
+});
+
+document
+.getElementById(
+  "backDashboardKnowledge"
+)
+.addEventListener(
+  "click",
+  () => {
+
+    showScreen(
+      "dashboard"
+    );
+
+});
+
+
+/* =========================
+AUTO LOGIN
+========================= */
+
+window.onload = () => {
+
+  const profile =
+    localStorage.getItem(
+      "userProfile"
+    );
+
+  if(profile){
+
+    const user =
+      JSON.parse(
+        profile
+      );
+
+    document
+    .getElementById(
+      "welcomeName"
+    ).innerText =
+    `สวัสดี ${user.name} 👋`;
+
+  }
+
+};
