@@ -317,6 +317,60 @@ REGISTER
 
 }
 
+/* =========================
+REGISTER
+========================= */
+
+.gender-grid,
+.frequency-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+}
+
+.gender-btn,
+.freq-btn{
+
+  padding:14px;
+
+  border-radius:14px;
+
+  background:white;
+
+  border:1px solid #ddd;
+
+}
+
+.gender-btn.active,
+.freq-btn.active{
+
+  background:var(--green);
+
+  color:white;
+
+  border-color:var(--green);
+
+}
+
+#errorMsg{
+
+  color:#d32f2f;
+
+  text-align:center;
+
+  margin-top:12px;
+
+  min-height:20px;
+
+}
+
 
 /* =========================
 CARD
