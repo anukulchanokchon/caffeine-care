@@ -26,14 +26,9 @@ if(code){
     })
   );
 
-  document
-    .getElementById("welcomeName")
-    .innerText =
-    "สวัสดี ผู้ใช้ LINE 👋";
+  window.location.href =
+  "https://anukulchanokchon.github.io/caffeine-care/";
 
-  showScreen("dashboard");
-
-  return;
 }
 
 function loginWithLine() {
