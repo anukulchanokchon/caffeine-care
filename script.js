@@ -559,7 +559,16 @@ fetch(
           : "Normal"
     })
   }
-);
+)
+.then(res => res.text())
+.then(data => {
+  console.log("SUCCESS:", data);
+  alert("ส่งข้อมูลสำเร็จ");
+})
+.catch(err => {
+  console.error(err);
+  alert("ส่งข้อมูลไม่สำเร็จ");
+});
 
 showScreen("dashboard");
 
