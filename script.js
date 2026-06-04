@@ -497,6 +497,11 @@ document
 
 saveHistory();
 
+const profile =
+  JSON.parse(
+    localStorage.getItem("userProfile")
+  ) || {};
+
 fetch(
   "https://script.google.com/macros/s/AKfycbxnU8pX673nM0QHsaG6Byf4YO2Uv2CkBgGQm08T4Xct3o4krmNibZ8TekDK919SueQp/exec",
   {
@@ -506,25 +511,20 @@ fetch(
     },
     body: JSON.stringify({
       customerId: 1,
-const profile =
-  JSON.parse(
-    localStorage.getItem("userProfile")
-  ) || {};
-
-name: profile.name || "Unknown",
+      name: profile.name || "Unknown",
       lineUserId: "TEMP",
       caffeine: currentCaffeine,
       source: "Website",
       time: new Date().toLocaleTimeString("th-TH"),
-      status: totalCaffeine > 400 ? "High Risk" : "Normal"
+      status:
+        totalCaffeine > 400
+          ? "High Risk"
+          : "Normal"
     })
   }
 );
 
-showScreen(
-  "dashboard"
-);
-});
+showScreen("dashboard");
 
 /* =========================
 UPDATE RISK
