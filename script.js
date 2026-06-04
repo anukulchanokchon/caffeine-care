@@ -526,12 +526,14 @@ fetch(
 
 showScreen("dashboard");
 
+});
+
 /* =========================
 UPDATE RISK
 ========================= */
 
 function updateRisk(){
-
+  
   const riskLevel =
     document.getElementById(
       "riskLevel"
