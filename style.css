@@ -251,6 +251,17 @@ button:hover{
 
 }
 
+body{
+
+  background:red !important;
+  font-family:
+  "Segoe UI",
+  sans-serif;
+
+  color:var(--text);
+
+}
+
 /* =========================
 REGISTER
 ========================= */
