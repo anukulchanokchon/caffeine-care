@@ -514,6 +514,7 @@ fetch(
 showScreen(
   "dashboard"
 );
+});
 
 /* =========================
 UPDATE RISK
