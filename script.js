@@ -1064,14 +1064,13 @@ if(code){
     "true"
   );
 
-  document
-  .getElementById(
-    "welcomeName"
-  ).innerText =
-  "สวัสดี ผู้ใช้ LINE 👋";
-
-  showScreen(
-    "dashboard"
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify({
+      name: "ผู้ใช้ LINE"
+    })
   );
+
+  showScreen("dashboard");
 
 }
