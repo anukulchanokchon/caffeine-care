@@ -506,7 +506,7 @@ const profile =
   ) || {};
 
 fetch(
-  "https://docs.google.com/spreadsheets/d/1-80zX2BLr19UmDI9-jrBsbm2ryuRQmvJPYQiubM-PPw/edit?usp=drivesdk",
+  "https://script.google.com/macros/s/AKfycbxnU8pX673nM0QHsaG6Byf4YO2Uv2CkBgGQm08T4Xct3o4krmNibZ8TekDK919SueQp/exec",
   {
     method: "POST",
     headers: {
