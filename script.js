@@ -14,11 +14,26 @@ const code =
 
 if(code){
 
-  alert(
-    "LINE Login สำเร็จ\n" +
-    code
+  localStorage.setItem(
+    "lineLogin",
+    "true"
   );
 
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify({
+      name: "ผู้ใช้ LINE"
+    })
+  );
+
+  document
+    .getElementById("welcomeName")
+    .innerText =
+    "สวัสดี ผู้ใช้ LINE 👋";
+
+  showScreen("dashboard");
+
+  return;
 }
 
 function loginWithLine() {
@@ -1048,29 +1063,3 @@ window.onload = () => {
   updateRisk();
 
 };
-
-const params =
-new URLSearchParams(
-  window.location.search
-);
-
-const code =
-params.get("code");
-
-if(code){
-
-  localStorage.setItem(
-    "lineLogin",
-    "true"
-  );
-
-  localStorage.setItem(
-    "userProfile",
-    JSON.stringify({
-      name: "ผู้ใช้ LINE"
-    })
-  );
-
-  showScreen("dashboard");
-
-}
