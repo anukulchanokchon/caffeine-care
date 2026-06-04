@@ -55,7 +55,12 @@ let selectedDrink = null;
 
 let currentCaffeine = 0;
 
-let totalCaffeine = 0;
+let totalCaffeine =
+  Number(
+    localStorage.getItem(
+      "totalCaffeine"
+    )
+  ) || 0;
 
 let historyData =
   JSON.parse(
@@ -465,8 +470,12 @@ document
 .getElementById("saveBtn")
 .addEventListener("click", () => {
 
-  totalCaffeine +=
-    currentCaffeine;
+totalCaffeine += currentCaffeine;
+
+localStorage.setItem(
+  "totalCaffeine",
+  totalCaffeine
+);
 
   const percent =
     Math.min(
@@ -932,9 +941,7 @@ window.onload = () => {
   if(profile){
 
     const user =
-      JSON.parse(
-        profile
-      );
+      JSON.parse(profile);
 
     document
     .getElementById(
@@ -943,5 +950,32 @@ window.onload = () => {
     `สวัสดี ${user.name} 👋`;
 
   }
+
+  document
+  .getElementById(
+    "dailyTotal"
+  ).innerText =
+  totalCaffeine +
+  " / 400 mg";
+
+  const percent =
+    Math.min(
+      (totalCaffeine / 400) * 100,
+      100
+    );
+
+  document
+  .getElementById(
+    "progressBar"
+  ).style.width =
+  percent + "%";
+
+  document
+  .getElementById(
+    "progressText"
+  ).innerText =
+  Math.round(percent) + "%";
+
+  updateRisk();
 
 };
