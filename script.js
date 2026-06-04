@@ -1048,3 +1048,30 @@ window.onload = () => {
   updateRisk();
 
 };
+
+const params =
+new URLSearchParams(
+  window.location.search
+);
+
+const code =
+params.get("code");
+
+if(code){
+
+  localStorage.setItem(
+    "lineLogin",
+    "true"
+  );
+
+  document
+  .getElementById(
+    "welcomeName"
+  ).innerText =
+  "สวัสดี ผู้ใช้ LINE 👋";
+
+  showScreen(
+    "dashboard"
+  );
+
+}
