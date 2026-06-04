@@ -154,6 +154,12 @@ document
 
 });
 
+document
+.getElementById("lineLoginBtn")
+.addEventListener(
+  "click",
+  loginWithLine
+);
 
 /* =========================
 GENDER
