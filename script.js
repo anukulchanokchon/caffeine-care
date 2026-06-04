@@ -567,7 +567,11 @@ fetch(
 })
 .catch(err => {
   console.error(err);
-  alert("ส่งข้อมูลไม่สำเร็จ");
+
+  alert(
+    "ERROR: " +
+    err.message
+  );
 });
 
 showScreen("dashboard");
