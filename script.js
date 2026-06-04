@@ -543,9 +543,7 @@ fetch(
   "https://script.google.com/macros/s/AKfycbyYw-epTBlDep8qhZ9W9v_-LE1UJyQFEe27d8xbBL8iHy0SR_4ZrvWHnzwJC_wgJmFK/exec",
   {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    mode: "no-cors",
     body: JSON.stringify({
       customerId: 1,
       name: profile.name || "Unknown",
@@ -560,18 +558,11 @@ fetch(
     })
   }
 )
-.then(res => res.text())
-.then(data => {
-  console.log("SUCCESS:", data);
+.then(() => {
   alert("ส่งข้อมูลสำเร็จ");
 })
 .catch(err => {
-  console.error(err);
-
-  alert(
-    "ERROR: " +
-    err.message
-  );
+  alert(err.message);
 });
 
 showScreen("dashboard");
