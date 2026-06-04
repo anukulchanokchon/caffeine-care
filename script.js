@@ -51,6 +51,29 @@ function showScreen(screenName){
 APP DATA
 ========================= */
 
+const today =
+  new Date()
+  .toLocaleDateString("th-TH");
+
+const savedDate =
+  localStorage.getItem(
+    "caffeineDate"
+  );
+
+if(savedDate !== today){
+
+  localStorage.setItem(
+    "caffeineDate",
+    today
+  );
+
+  localStorage.setItem(
+    "totalCaffeine",
+    0
+  );
+
+}
+
 let selectedDrink = null;
 
 let currentCaffeine = 0;
@@ -64,7 +87,9 @@ let totalCaffeine =
 
 let historyData =
   JSON.parse(
-    localStorage.getItem("caffeineHistory")
+    localStorage.getItem(
+      "caffeineHistory"
+    )
   ) || [];
 
 
