@@ -253,7 +253,8 @@ button:hover{
 
 body{
 
-  background:red !important;
+  background:var(--cream);
+
   font-family:
   "Segoe UI",
   sans-serif;
