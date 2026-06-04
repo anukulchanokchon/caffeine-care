@@ -4,11 +4,28 @@ CAFFEINE CARE V3
 
 const LINE_CHANNEL_ID = "2010253274";
 
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const code =
+  params.get("code");
+
+if(code){
+
+  alert(
+    "LINE Login สำเร็จ\n" +
+    code
+  );
+
+}
+
 function loginWithLine() {
 
   const redirect =
     encodeURIComponent(
-      window.location.href
+      "https://anukulchanokchon.github.io/caffeine-care/"
     );
 
   const url =
