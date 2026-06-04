@@ -57,7 +57,10 @@ let currentCaffeine = 0;
 
 let totalCaffeine = 0;
 
-let historyData = [];
+let historyData =
+  JSON.parse(
+    localStorage.getItem("caffeineHistory")
+  ) || [];
 
 
 /* =========================
