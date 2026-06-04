@@ -1031,3 +1031,11 @@ window.onload = () => {
   updateRisk();
 
 };
+
+document
+.getElementById("lineLoginBtn")
+.addEventListener("click", () => {
+
+  alert("LINE Login กำลังทำงาน");
+
+});
