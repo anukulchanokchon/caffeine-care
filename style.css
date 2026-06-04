@@ -233,6 +233,24 @@ button:hover{
 
 }
 
+.line-login-btn{
+
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+
+  border:2px solid #06C755;
+
+  border-radius:14px;
+
+  background:white;
+
+  color:#06C755;
+
+  font-weight:700;
+
+}
+
 /* =========================
 REGISTER
 ========================= */
