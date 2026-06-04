@@ -2,6 +2,8 @@
 CAFFEINE CARE V3
 ========================= */
 
+console.log("SCRIPT LOADED");
+
 const screens = {
 
   welcome:
@@ -499,9 +501,17 @@ fetch(
   "https://script.google.com/macros/s/AKfycbxnU8pX673nM0QHsaG6Byf4YO2Uv2CkBgGQm08T4Xct3o4krmNibZ8TekDK919SueQp/exec",
   {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({
       customerId: 1,
-      name: JSON.parse(localStorage.getItem("userProfile")).name,
+const profile =
+  JSON.parse(
+    localStorage.getItem("userProfile")
+  ) || {};
+
+name: profile.name || "Unknown",
       lineUserId: "TEMP",
       caffeine: currentCaffeine,
       source: "Website",
