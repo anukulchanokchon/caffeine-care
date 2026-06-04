@@ -2,6 +2,23 @@
 CAFFEINE CARE V3
 ========================= */
 
+const LINE_CHANNEL_ID = "2010253274";
+
+function loginWithLine() {
+
+  const redirect =
+    encodeURIComponent(
+      window.location.href
+    );
+
+  const url =
+    `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${LINE_CHANNEL_ID}&redirect_uri=${redirect}&state=12345&scope=profile%20openid`;
+
+  window.location.href = url;
+
+}
+
+
 console.log("SCRIPT LOADED");
 
 const screens = {
