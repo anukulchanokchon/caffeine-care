@@ -48,6 +48,8 @@ function loginWithLine() {
 
 console.log("SCRIPT LOADED");
 
+alert("JS START");
+
 const screens = {
 
   welcome:
