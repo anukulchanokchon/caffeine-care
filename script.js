@@ -4,8 +4,6 @@ CAFFEINE CARE V3
 
 console.log("SCRIPT LOADED");
 
-alert("JS START");
-
 const screens = {
 
   welcome:
@@ -138,13 +136,6 @@ document
   showScreen("dashboard");
 
 });
-
-document
-.getElementById("lineLoginBtn")
-.addEventListener(
-  "click",
-  loginWithLine
-);
 
 /* =========================
 GENDER
