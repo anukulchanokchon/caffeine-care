@@ -2,37 +2,6 @@
 CAFFEINE CARE V3
 ========================= */
 
-const LINE_CHANNEL_ID = "2010253274";
-
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
-
-const code =
-  params.get("code");
-
-if(code){
-
-  alert("LINE CALLBACK");
-
-}
-
-function loginWithLine() {
-
-  const redirect =
-    encodeURIComponent(
-      "https://anukulchanokchon.github.io/caffeine-care/"
-    );
-
-  const url =
-    `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${LINE_CHANNEL_ID}&redirect_uri=${redirect}&state=12345&scope=profile%20openid`;
-
-  window.location.href = url;
-
-}
-
-
 console.log("SCRIPT LOADED");
 
 alert("JS START");
