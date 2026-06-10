@@ -558,7 +558,9 @@ fetch(
   }
 )
 .then(() => {
-  alert("ส่งข้อมูลสำเร็จ");
+
+  showScreen("dashboard");
+
 })
 .catch(err => {
   alert(err.message);
