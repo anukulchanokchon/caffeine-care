@@ -559,11 +559,14 @@ fetch(
 )
 .then(() => {
 
-  showScreen("dashboard");
+  console.log("saved");
 
 })
+
 .catch(err => {
+
   alert(err.message);
+
 });
 
 showScreen("dashboard");
