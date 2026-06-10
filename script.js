@@ -14,20 +14,7 @@ const code =
 
 if(code){
 
-  localStorage.setItem(
-    "lineLogin",
-    "true"
-  );
-
-  localStorage.setItem(
-    "userProfile",
-    JSON.stringify({
-      name: "ผู้ใช้ LINE"
-    })
-  );
-
-  window.location.href =
-  "https://anukulchanokchon.github.io/caffeine-care/";
+  alert("LINE CALLBACK");
 
 }
 
