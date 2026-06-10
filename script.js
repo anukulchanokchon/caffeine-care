@@ -543,18 +543,17 @@ fetch(
   {
     method: "POST",
     mode: "no-cors",
-    body: JSON.stringify({
-      customerId: 1,
-      name: profile.name || "Unknown",
-      lineUserId: "TEMP",
-      caffeine: currentCaffeine,
-      source: "Website",
-      time: new Date().toLocaleTimeString("th-TH"),
-      status:
-        totalCaffeine > 400
-          ? "High Risk"
-          : "Normal"
-    })
+body: JSON.stringify({
+  customerId: 1,
+  name: profile.name || "Unknown",
+  caffeine: currentCaffeine,
+  source: "Website",
+  time: new Date().toLocaleTimeString("th-TH"),
+  status:
+    totalCaffeine > 400
+      ? "High Risk"
+      : "Normal"
+})
   }
 )
 .then(() => {
