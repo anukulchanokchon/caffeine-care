@@ -973,6 +973,47 @@ document
 
 });
 
+document
+.getElementById("signUpBtn")
+.addEventListener("click", async () => {
+
+  const email =
+    document.getElementById("authEmail").value;
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const error =
+    document.getElementById("authError");
+
+  if(email === "" || password === "") {
+    error.innerText = "กรุณากรอกอีเมลและรหัสผ่าน";
+    return;
+  }
+
+  try {
+
+    const result =
+      await window.createUserWithEmailAndPassword(
+        window.auth,
+        email,
+        password
+      );
+
+    localStorage.setItem("userId", result.user.uid);
+
+    error.innerText = "";
+
+    showScreen("register");
+
+  } catch(err) {
+
+    error.innerText = err.message;
+
+  }
+
+});
+
 /* =========================
 AUTO LOGIN
 ========================= */
