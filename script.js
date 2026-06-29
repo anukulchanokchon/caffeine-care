@@ -945,8 +945,6 @@ document
 .getElementById("signUpBtn")
 .addEventListener("click", async () => {
 
-  console.log("Sign Up Clicked");
-
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value.trim();
   const error = document.getElementById("authError");
@@ -979,6 +977,52 @@ document
   console.error(err);
   error.innerText = err.code + " : " + err.message;
 }
+
+});
+
+document
+.getElementById("loginBtn")
+.addEventListener("click", async () => {
+
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value.trim();
+  const error = document.getElementById("authError");
+
+  if (email === "" || password === "") {
+    error.innerText = "กรุณากรอกข้อมูลให้ครบถ้วน";
+    return;
+  }
+
+  try {
+    const result =
+      await window.signInWithEmailAndPassword(
+        window.auth,
+        email,
+        password
+      );
+
+    localStorage.setItem("userId", result.user.uid);
+    localStorage.setItem("userEmail", result.user.email);
+
+    error.innerText = "";
+
+    const profile = localStorage.getItem("userProfile");
+
+    if (profile) {
+      const user = JSON.parse(profile);
+
+      document.getElementById("welcomeName").innerText =
+        `สวัสดี ${user.name} 👋`;
+
+      showScreen("dashboard");
+    } else {
+      showScreen("register");
+    }
+
+  } catch (err) {
+    console.error(err);
+    error.innerText = err.code + " : " + err.message;
+  }
 
 });
 
