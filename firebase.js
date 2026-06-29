@@ -3,7 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebas
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // Firebase Config
@@ -27,5 +28,6 @@ const auth = getAuth(app);
 window.auth = auth;
 window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+window.sendPasswordResetEmail = sendPasswordResetEmail;
 
 console.log("Firebase Connected ✅");
