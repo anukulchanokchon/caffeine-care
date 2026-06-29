@@ -1089,6 +1089,12 @@ if (profileSnap.exists()) {
   showScreen("dashboard");
 } else {
   localStorage.removeItem("userProfile");
+  localStorage.removeItem("totalCaffeine");
+  localStorage.removeItem("caffeineHistory");
+
+  totalCaffeine = 0;
+  historyData = [];
+
   showScreen("register");
 }
 
@@ -1118,91 +1124,44 @@ if (profileSnap.exists()) {
 AUTO LOGIN
 ========================= */
 
-window.onAuthStateChanged(window.auth, user => {
+window.onAuthStateChanged(window.auth, async user => {
 
-  if (user) {
-    localStorage.setItem("userId", user.uid);
-    localStorage.setItem("userEmail", user.email);
-
-    const profile = localStorage.getItem("userProfile");
-
-    if (profile) {
-      const savedUser = JSON.parse(profile);
-
-      document.getElementById("welcomeName").innerText =
-        `สวัสดี ${savedUser.name} 👋`;
-
-      showScreen("dashboard");
-    } else {
-      showScreen("register");
-    }
+  if (!user) {
+    return;
   }
 
-});
+  localStorage.setItem("userId", user.uid);
+  localStorage.setItem("userEmail", user.email);
 
-window.onload = () => {
+  const profileRef = window.doc(
+    window.db,
+    "users",
+    user.uid
+  );
 
-  const profile =
-    localStorage.getItem(
-      "userProfile"
+  const profileSnap = await window.getDoc(profileRef);
+
+  if (profileSnap.exists()) {
+    const savedUser = profileSnap.data();
+
+    localStorage.setItem(
+      "userProfile",
+      JSON.stringify(savedUser)
     );
 
-  if(profile){
+    document.getElementById("welcomeName").innerText =
+      `สวัสดี ${savedUser.name} 👋`;
 
-    const user =
-      JSON.parse(profile);
+    showScreen("dashboard");
+  } else {
+    localStorage.removeItem("userProfile");
+    localStorage.removeItem("totalCaffeine");
+    localStorage.removeItem("caffeineHistory");
 
-    document
-    .getElementById(
-      "welcomeName"
-    ).innerText =
-    `สวัสดี ${user.name} 👋`;
+    totalCaffeine = 0;
+    historyData = [];
 
+    showScreen("register");
   }
-  
-  document
-  .getElementById(
-    "dailyTotal"
-  ).innerText =
-  totalCaffeine +
-  " / 400 mg";
-
-  const percent =
-    Math.min(
-      (totalCaffeine / 400) * 100,
-      100
-    );
-
-  document
-  .getElementById(
-    "progressBar"
-  ).style.width =
-  percent + "%";
-
-  document
-  .getElementById(
-    "progressText"
-  ).innerText =
-  Math.round(percent) + "%";
-
-  updateRisk();
-
-};
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click", async () => {
-
-  const confirmLogout =
-    confirm("ต้องการออกจากระบบใช่หรือไม่?");
-
-  if (!confirmLogout) return;
-
-  await window.signOut(window.auth);
-
-  localStorage.removeItem("userId");
-  localStorage.removeItem("userEmail");
-
-  showScreen("welcome");
 
 });
