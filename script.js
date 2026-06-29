@@ -526,15 +526,16 @@ localStorage.setItem(
 
 saveHistory();
 
-  await window.setDoc(
+await window.setDoc(
   window.doc(
     window.db,
     "users",
     localStorage.getItem("userId")
   ),
   {
-    totalCaffeine: totalCaffeine,
-    history: historyData
+    totalCaffeine: Number(totalCaffeine),
+    history: historyData,
+    updatedAt: new Date().toISOString()
   },
   { merge: true }
 );
@@ -554,7 +555,7 @@ body: JSON.stringify({
   deviceId: getDeviceId(),
   name: profile.name || "Unknown",
   email: localStorage.getItem("userEmail"),
-  caffeine: currentCaffeine,
+  caffeine: Number(currentCaffeine),
   source: "Website",
   time: new Date().toLocaleTimeString("th-TH"),
   status:
@@ -1155,12 +1156,16 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
-  localStorage.removeItem("totalCaffeine");
-  localStorage.removeItem("caffeineHistory");
+  totalCaffeine = user.totalCaffeine || 0;
+  historyData = user.history || [];
 
-  totalCaffeine = 0;
-  historyData = [];
+  localStorage.setItem("totalCaffeine", totalCaffeine);
 
+  localStorage.setItem(
+    "caffeineHistory",
+    JSON.stringify(historyData)
+  );
+  
   document.getElementById("welcomeName").innerText =
     `สวัสดี ${user.name} 👋`;
 
