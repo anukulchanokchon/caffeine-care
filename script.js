@@ -1157,3 +1157,27 @@ window.onAuthStateChanged(window.auth, async user => {
   }
 
 });
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+  const confirmLogout =
+    confirm("ต้องการออกจากระบบใช่หรือไม่?");
+
+  if (!confirmLogout) return;
+
+  await window.signOut(window.auth);
+
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userProfile");
+  localStorage.removeItem("totalCaffeine");
+  localStorage.removeItem("caffeineHistory");
+
+  totalCaffeine = 0;
+  historyData = [];
+
+  showScreen("welcome");
+
+});
