@@ -1133,28 +1133,34 @@ window.onAuthStateChanged(window.auth, async user => {
 
   const profileSnap = await window.getDoc(profileRef);
 
-  if (profileSnap.exists()) {
-    const savedUser = profileSnap.data();
+if (profileSnap.exists()) {
+  const user = profileSnap.data();
 
-    localStorage.setItem(
-      "userProfile",
-      JSON.stringify(savedUser)
-    );
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify(user)
+  );
 
-    document.getElementById("welcomeName").innerText =
-      `สวัสดี ${savedUser.name} 👋`;
+  localStorage.removeItem("totalCaffeine");
+  localStorage.removeItem("caffeineHistory");
 
-    showScreen("dashboard");
-  } else {
-    localStorage.removeItem("userProfile");
-    localStorage.removeItem("totalCaffeine");
-    localStorage.removeItem("caffeineHistory");
+  totalCaffeine = 0;
+  historyData = [];
 
-    totalCaffeine = 0;
-    historyData = [];
+  document.getElementById("welcomeName").innerText =
+    `สวัสดี ${user.name} 👋`;
 
-    showScreen("register");
-  }
+  showScreen("dashboard");
+} else {
+  localStorage.removeItem("userProfile");
+  localStorage.removeItem("totalCaffeine");
+  localStorage.removeItem("caffeineHistory");
+
+  totalCaffeine = 0;
+  historyData = [];
+
+  showScreen("register");
+}
 
 });
 
