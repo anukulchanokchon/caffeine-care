@@ -712,5 +712,7 @@ RESPONSIVE
 }
 
 .logout-btn{
-    margin-top:30px;
+  margin-top:30px;
+  color:#b23b3b;
+  font-weight:600;
 }
