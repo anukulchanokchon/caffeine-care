@@ -119,38 +119,6 @@ document
 
 });
 
-
-document
-.getElementById("quickLogin")
-.addEventListener("click", () => {
-
-  const profile =
-    localStorage.getItem(
-      "userProfile"
-    );
-
-  if(!profile){
-
-    alert(
-      "ยังไม่พบบัญชีผู้ใช้ กรุณาสมัครสมาชิกก่อน"
-    );
-
-    return;
-
-  }
-
-  const user =
-    JSON.parse(profile);
-
-  document
-  .getElementById("welcomeName")
-  .innerText =
-  `สวัสดี ${user.name} 👋`;
-
-  showScreen("dashboard");
-
-});
-
 /* =========================
 GENDER
 ========================= */
