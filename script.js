@@ -981,47 +981,37 @@ document
 });
 
 document
-.getElementById("loginBtn")
+.getElementById("resetPasswordBtn")
 .addEventListener("click", async () => {
 
   const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value.trim();
   const error = document.getElementById("authError");
 
-  if (email === "" || password === "") {
-    error.innerText = "กรุณากรอกข้อมูลให้ครบถ้วน";
+  if (email === "") {
+    error.innerText = "กรุณากรอกอีเมลก่อนรีเซ็ตรหัสผ่าน";
     return;
   }
 
   try {
-    const result =
-      await window.signInWithEmailAndPassword(
-        window.auth,
-        email,
-        password
-      );
 
-    localStorage.setItem("userId", result.user.uid);
-    localStorage.setItem("userEmail", result.user.email);
+    await window.sendPasswordResetEmail(
+      window.auth,
+      email
+    );
 
-    error.innerText = "";
-
-    const profile = localStorage.getItem("userProfile");
-
-    if (profile) {
-      const user = JSON.parse(profile);
-
-      document.getElementById("welcomeName").innerText =
-        `สวัสดี ${user.name} 👋`;
-
-      showScreen("dashboard");
-    } else {
-      showScreen("register");
-    }
+    error.innerText =
+      "ส่งลิงก์รีเซ็ตรหัสผ่านไปที่อีเมลแล้ว กรุณาตรวจสอบกล่องจดหมาย";
 
   } catch (err) {
+
     console.error(err);
-    error.innerText = err.code + " : " + err.message;
+
+    if (err.code === "auth/invalid-email") {
+      error.innerText = "รูปแบบอีเมลไม่ถูกต้อง";
+    } else {
+      error.innerText = "ไม่สามารถส่งอีเมลรีเซ็ตรหัสผ่านได้";
+    }
+
   }
 
 });
