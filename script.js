@@ -9,6 +9,9 @@ const screens = {
   welcome:
     document.getElementById("welcome"),
 
+  auth:
+    document.getElementById("authScreen"),
+
   register:
     document.getElementById("register"),
 
@@ -112,7 +115,7 @@ document
 .getElementById("goRegister")
 .addEventListener("click", () => {
 
-  showScreen("register");
+  showScreen("auth");
 
 });
 
@@ -970,6 +973,13 @@ document
 
 });
 
+document
+.getElementById("signUpBtn")
+.addEventListener("click", () => {
+
+  showScreen("register");
+
+});
 
 /* =========================
 AUTO LOGIN
