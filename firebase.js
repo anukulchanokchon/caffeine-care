@@ -1,6 +1,10 @@
 // Import the functions you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 // Firebase Config
 const firebaseConfig = {
@@ -21,5 +25,7 @@ const auth = getAuth(app);
 
 // ทำให้ไฟล์อื่นเรียกใช้ได้
 window.auth = auth;
+window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
 
 console.log("Firebase Connected ✅");
