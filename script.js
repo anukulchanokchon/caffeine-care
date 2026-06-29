@@ -274,6 +274,20 @@ document
     "dashboard"
   );
 
+await window.setDoc(
+  window.doc(
+    window.db,
+    "users",
+    localStorage.getItem("userId")
+  ),
+  {
+    ...profile,
+    totalCaffeine: 0,
+    history: []
+  },
+  { merge: true }
+);
+  
 });
 
 /* =========================
@@ -521,9 +535,9 @@ await window.setDoc(
     localStorage.getItem("userId")
   ),
   {
-    ...profile,
-    totalCaffeine: 0,
-    history: []
+    totalCaffeine: Number(totalCaffeine),
+    history: historyData,
+    updatedAt: new Date().toISOString()
   },
   { merge: true }
 );
@@ -574,24 +588,6 @@ UPDATE RISK
 ========================= */
 
 function updateRisk(){
-
-  function updateDashboard(){
-
-  document.getElementById("dailyTotal").innerText =
-    totalCaffeine + " / 400 mg";
-
-  const percent =
-    Math.min((totalCaffeine / 400) * 100, 100);
-
-  document.getElementById("progressBar").style.width =
-    percent + "%";
-
-  document.getElementById("progressText").innerText =
-    Math.round(percent) + "%";
-
-  updateRisk();
-
-}
   
   const riskLevel =
     document.getElementById(
@@ -637,6 +633,23 @@ function updateRisk(){
 
 }
 
+  function updateDashboard(){
+
+  document.getElementById("dailyTotal").innerText =
+    totalCaffeine + " / 400 mg";
+
+  const percent =
+    Math.min((totalCaffeine / 400) * 100, 100);
+
+  document.getElementById("progressBar").style.width =
+    percent + "%";
+
+  document.getElementById("progressText").innerText =
+    Math.round(percent) + "%";
+
+  updateRisk();
+
+}
 
 /* =========================
 HISTORY
