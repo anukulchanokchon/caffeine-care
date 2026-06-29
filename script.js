@@ -1136,20 +1136,6 @@ window.onload = () => {
     `สวัสดี ${user.name} 👋`;
 
   }
-
-  document
-.getElementById("logoutBtn")
-.addEventListener("click", async () => {
-
-  await window.signOut(window.auth);
-
-  localStorage.removeItem("userProfile");
-  localStorage.removeItem("userId");
-  localStorage.removeItem("userEmail");
-
-  showScreen("welcome");
-
-});
   
   document
   .getElementById(
