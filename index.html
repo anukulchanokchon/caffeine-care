@@ -48,7 +48,44 @@ PAGE 1 : WELCOME
 
 </div>
 
+<!-- =========================
+PAGE AUTH : LOGIN / SIGN UP
+========================= -->
 
+<div id="authScreen"
+     class="screen"
+     style="display:none;">
+
+  <h2>เข้าสู่ระบบ / สมัครสมาชิก</h2>
+
+  <label>อีเมล</label>
+  <input
+    id="authEmail"
+    type="email"
+    placeholder="example@email.com">
+
+  <label>รหัสผ่าน</label>
+  <input
+    id="authPassword"
+    type="password"
+    placeholder="อย่างน้อย 6 ตัวอักษร">
+
+  <button
+    id="signUpBtn"
+    class="primary">
+    สมัครสมาชิก
+  </button>
+
+  <button
+    id="loginBtn"
+    class="secondary">
+    เข้าสู่ระบบ
+  </button>
+
+  <p id="authError"></p>
+
+</div>
+    
 <!-- =========================
 PAGE 2 : REGISTER
 ========================= -->
@@ -58,7 +95,7 @@ PAGE 2 : REGISTER
      style="display:none;">
 
   <h2>สร้างโปรไฟล์</h2>
-
+  
   <label>ชื่อ</label>
 
   <input
