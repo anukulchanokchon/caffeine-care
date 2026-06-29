@@ -265,18 +265,6 @@ localStorage.setItem(
   JSON.stringify(profile)
 );
 
-await window.setDoc(
-
-  window.doc(
-    window.db,
-    "users",
-    localStorage.getItem("userId")
-  ),
-
-  profile
-
-);
-
 document
 .getElementById(
   "welcomeName"
@@ -533,9 +521,9 @@ await window.setDoc(
     localStorage.getItem("userId")
   ),
   {
-    totalCaffeine: Number(totalCaffeine),
-    history: historyData,
-    updatedAt: new Date().toISOString()
+    ...profile,
+    totalCaffeine: 0,
+    history: []
   },
   { merge: true }
 );
@@ -586,6 +574,24 @@ UPDATE RISK
 ========================= */
 
 function updateRisk(){
+
+  function updateDashboard(){
+
+  document.getElementById("dailyTotal").innerText =
+    totalCaffeine + " / 400 mg";
+
+  const percent =
+    Math.min((totalCaffeine / 400) * 100, 100);
+
+  document.getElementById("progressBar").style.width =
+    percent + "%";
+
+  document.getElementById("progressText").innerText =
+    Math.round(percent) + "%";
+
+  updateRisk();
+
+}
   
   const riskLevel =
     document.getElementById(
@@ -1093,16 +1099,33 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
+  totalCaffeine = user.totalCaffeine || 0;
+  historyData = user.history || [];
+
+  localStorage.setItem("totalCaffeine", totalCaffeine);
+  localStorage.setItem(
+    "caffeineHistory",
+    JSON.stringify(historyData)
+  );
+
+  updateDashboard();
+
+  document.getElementById("welcomeName").innerText =
+    `สวัสดี ${user.name} 👋`;
+
+  showScreen("dashboard");
+
+} else {
+  localStorage.removeItem("userProfile");
   localStorage.removeItem("totalCaffeine");
   localStorage.removeItem("caffeineHistory");
 
   totalCaffeine = 0;
   historyData = [];
 
-  document.getElementById("welcomeName").innerText =
-    `สวัสดี ${user.name} 👋`;
+  updateDashboard();
 
-  showScreen("dashboard");
+  showScreen("register");
 }
 
   } catch (err) {
@@ -1156,15 +1179,16 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
-  totalCaffeine = user.totalCaffeine || 0;
-  historyData = user.history || [];
+totalCaffeine = user.totalCaffeine || 0;
+historyData = user.history || [];
 
-  localStorage.setItem("totalCaffeine", totalCaffeine);
+localStorage.setItem("totalCaffeine", totalCaffeine);
+localStorage.setItem(
+  "caffeineHistory",
+  JSON.stringify(historyData)
+);
 
-  localStorage.setItem(
-    "caffeineHistory",
-    JSON.stringify(historyData)
-  );
+updateDashboard();
   
   document.getElementById("welcomeName").innerText =
     `สวัสดี ${user.name} 👋`;
