@@ -977,22 +977,21 @@ document
 .getElementById("signUpBtn")
 .addEventListener("click", async () => {
 
-  const email =
-    document.getElementById("authEmail").value;
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value.trim();
+  const error = document.getElementById("authError");
 
-  const password =
-    document.getElementById("authPassword").value;
+  if (email === "" || password === "") {
+    error.innerText = "กรุณากรอกข้อมูลให้ครบถ้วน";
+    return;
+  }
 
-  const error =
-    document.getElementById("authError");
-
-  if(email === "" || password === "") {
-    error.innerText = "กรุณากรอกอีเมลและรหัสผ่าน";
+  if (password.length < 6) {
+    error.innerText = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
     return;
   }
 
   try {
-
     const result =
       await window.createUserWithEmailAndPassword(
         window.auth,
@@ -1001,15 +1000,13 @@ document
       );
 
     localStorage.setItem("userId", result.user.uid);
+    localStorage.setItem("userEmail", result.user.email);
 
     error.innerText = "";
-
     showScreen("register");
 
-  } catch(err) {
-
+  } catch (err) {
     error.innerText = err.message;
-
   }
 
 });
