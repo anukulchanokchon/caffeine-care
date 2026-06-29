@@ -662,12 +662,7 @@ function renderHistory(){
       "historyList"
     );
 
-  const saved =
-    JSON.parse(
-      localStorage.getItem(
-        "caffeineHistory"
-      )
-    ) || [];
+  const saved = historyData || [];
 
   container.innerHTML = "";
 
@@ -1083,19 +1078,16 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
-  document.getElementById("welcomeName").innerText =
-    `สวัสดี ${user.name} 👋`;
-
-  showScreen("dashboard");
-} else {
-  localStorage.removeItem("userProfile");
   localStorage.removeItem("totalCaffeine");
   localStorage.removeItem("caffeineHistory");
 
   totalCaffeine = 0;
   historyData = [];
 
-  showScreen("register");
+  document.getElementById("welcomeName").innerText =
+    `สวัสดี ${user.name} 👋`;
+
+  showScreen("dashboard");
 }
 
   } catch (err) {
