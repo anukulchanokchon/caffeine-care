@@ -265,15 +265,6 @@ localStorage.setItem(
   JSON.stringify(profile)
 );
 
-document
-.getElementById(
-  "welcomeName"
-).innerText =
-`สวัสดี ${name} 👋`;
-  showScreen(
-    "dashboard"
-  );
-
 await window.setDoc(
   window.doc(
     window.db,
@@ -286,6 +277,21 @@ await window.setDoc(
     history: []
   },
   { merge: true }
+);
+
+totalCaffeine = 0;
+historyData = [];
+
+updateDashboard();
+
+document
+.getElementById(
+  "welcomeName"
+).innerText =
+`สวัสดี ${name} 👋`;
+
+showScreen(
+  "dashboard"
 );
   
 });
