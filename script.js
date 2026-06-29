@@ -977,6 +977,8 @@ document
 .getElementById("signUpBtn")
 .addEventListener("click", async () => {
 
+  console.log("Sign Up Clicked");
+
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value.trim();
   const error = document.getElementById("authError");
@@ -1006,8 +1008,9 @@ document
     showScreen("register");
 
   } catch (err) {
-    error.innerText = err.message;
-  }
+  console.error(err);
+  error.innerText = err.code + " : " + err.message;
+}
 
 });
 
