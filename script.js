@@ -973,14 +973,6 @@ document
 
 });
 
-document
-.getElementById("signUpBtn")
-.addEventListener("click", () => {
-
-  showScreen("register");
-
-});
-
 /* =========================
 AUTO LOGIN
 ========================= */
