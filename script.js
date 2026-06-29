@@ -545,7 +545,7 @@ const profile =
   ) || {};
 
 fetch(
-  "https://script.google.com/macros/s/AKfycbz4ajOghqDLCsKZ799p7y6PGZ03y3uOk48IgIKuTSoyhOQrghQGXnvbbVwjbFVD7M5c/exec",
+  "https://script.google.com/macros/s/AKfycbyCXUxV0Ls0pIVefBr56K_7gWHjRXHngtWkuVuno3J3EYMNo22JUjkqJuES29mgUn3A/exec",
   {
     method: "POST",
     mode: "no-cors",
