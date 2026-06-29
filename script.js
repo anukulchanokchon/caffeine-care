@@ -975,11 +975,11 @@ document
 
   } 
   
-  catch (err) {
+catch (err) {
   console.error(err);
 
   if (err.code === "auth/email-already-in-use") {
-    error.innerText = "อีเมลนี้เคยเข้าสู่ระบบแล้ว กรุณากดเข้าสู่ระบบแทน";
+    error.innerText = "อีเมลนี้ถูกลงทะเบียนแล้ว";
   } else if (err.code === "auth/invalid-email") {
     error.innerText = "รูปแบบอีเมลไม่ถูกต้อง";
   } else if (err.code === "auth/weak-password") {
@@ -1022,6 +1022,71 @@ document
       error.innerText = "ไม่สามารถส่งอีเมลรีเซ็ตรหัสผ่านได้";
     }
 
+  }
+
+});
+
+let loginFailCount = 0;
+
+document
+.getElementById("loginBtn")
+.addEventListener("click", async () => {
+
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value.trim();
+  const error = document.getElementById("authError");
+
+  if (email === "" || password === "") {
+    error.innerText = "กรุณากรอกข้อมูลให้ครบถ้วน";
+    return;
+  }
+
+  try {
+    const result =
+      await window.signInWithEmailAndPassword(
+        window.auth,
+        email,
+        password
+      );
+
+    loginFailCount = 0;
+
+    localStorage.setItem("userId", result.user.uid);
+    localStorage.setItem("userEmail", result.user.email);
+
+    error.innerText = "";
+
+    const profile = localStorage.getItem("userProfile");
+
+    if (profile) {
+      const user = JSON.parse(profile);
+
+      document.getElementById("welcomeName").innerText =
+        `สวัสดี ${user.name} 👋`;
+
+      showScreen("dashboard");
+    } else {
+      showScreen("register");
+    }
+
+  } catch (err) {
+    console.error(err);
+
+    if (err.code === "auth/invalid-credential") {
+      loginFailCount++;
+
+      if (loginFailCount >= 3) {
+        error.innerText =
+          "กรอกรหัสผ่านผิดมากเกินไป โปรดกดลืมรหัสผ่าน";
+      } else {
+        error.innerText =
+          "รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง";
+      }
+
+    } else {
+      error.innerText =
+        "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่";
+    }
   }
 
 });
