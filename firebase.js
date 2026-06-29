@@ -1,5 +1,6 @@
 // Import the functions you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,7 +10,12 @@ import {
   signOut
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-window.signOut = signOut;
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 // Firebase Config
 const firebaseConfig = {
@@ -28,12 +34,22 @@ const app = initializeApp(firebaseConfig);
 // Authentication
 const auth = getAuth(app);
 
+// Firestore Database
+const db = getFirestore(app);
+
 // ทำให้ไฟล์อื่นเรียกใช้ได้
 window.auth = auth;
+window.db = db;
+
 window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
 window.sendPasswordResetEmail = sendPasswordResetEmail;
 window.onAuthStateChanged = onAuthStateChanged;
 window.signOut = signOut;
 
+window.doc = doc;
+window.setDoc = setDoc;
+window.getDoc = getDoc;
+
 console.log("Firebase Connected ✅");
+console.log("Firestore Connected ✅");
