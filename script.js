@@ -485,7 +485,7 @@ SAVE RESULT
 
 document
 .getElementById("saveBtn")
-.addEventListener("click", () => {
+.addEventListener("click", async () => {
 
 totalCaffeine += currentCaffeine;
 
@@ -526,6 +526,19 @@ localStorage.setItem(
 
 saveHistory();
 
+  await window.setDoc(
+  window.doc(
+    window.db,
+    "users",
+    localStorage.getItem("userId")
+  ),
+  {
+    totalCaffeine: totalCaffeine,
+    history: historyData
+  },
+  { merge: true }
+);
+  
 const profile =
   JSON.parse(
     localStorage.getItem("userProfile")
