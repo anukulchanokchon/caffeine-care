@@ -34,5 +34,6 @@ window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
 window.signInWithEmailAndPassword = signInWithEmailAndPassword;
 window.sendPasswordResetEmail = sendPasswordResetEmail;
 window.onAuthStateChanged = onAuthStateChanged;
+window.signOut = signOut;
 
 console.log("Firebase Connected ✅");
