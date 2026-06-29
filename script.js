@@ -1067,18 +1067,30 @@ document
 
     error.innerText = "";
 
-    const profile = localStorage.getItem("userProfile");
+const profileRef = window.doc(
+  window.db,
+  "users",
+  result.user.uid
+);
 
-    if (profile) {
-      const user = JSON.parse(profile);
+const profileSnap = await window.getDoc(profileRef);
 
-      document.getElementById("welcomeName").innerText =
-        `สวัสดี ${user.name} 👋`;
+if (profileSnap.exists()) {
+  const user = profileSnap.data();
 
-      showScreen("dashboard");
-    } else {
-      showScreen("register");
-    }
+  localStorage.setItem(
+    "userProfile",
+    JSON.stringify(user)
+  );
+
+  document.getElementById("welcomeName").innerText =
+    `สวัสดี ${user.name} 👋`;
+
+  showScreen("dashboard");
+} else {
+  localStorage.removeItem("userProfile");
+  showScreen("register");
+}
 
   } catch (err) {
     console.error(err);
