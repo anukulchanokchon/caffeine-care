@@ -183,7 +183,7 @@ REGISTER
 
 document
 .getElementById("createProfile")
-.addEventListener("click", () => {
+.addEventListener("click", async () => {
 
   const name =
     document
@@ -260,17 +260,28 @@ document
 
   };
 
-  localStorage.setItem(
-    "userProfile",
-    JSON.stringify(profile)
-  );
+localStorage.setItem(
+  "userProfile",
+  JSON.stringify(profile)
+);
 
-  document
-  .getElementById(
-    "welcomeName"
-  ).innerText =
-  `สวัสดี ${name} 👋`;
+await window.setDoc(
 
+  window.doc(
+    window.db,
+    "users",
+    localStorage.getItem("userId")
+  ),
+
+  profile
+
+);
+
+document
+.getElementById(
+  "welcomeName"
+).innerText =
+`สวัสดี ${name} 👋`;
   showScreen(
     "dashboard"
   );
