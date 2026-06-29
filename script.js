@@ -78,6 +78,17 @@ let selectedDrink = null;
 
 let currentCaffeine = 0;
 
+function getDeviceId() {
+  let deviceId = localStorage.getItem("deviceId");
+
+  if (!deviceId) {
+    deviceId = crypto.randomUUID();
+    localStorage.setItem("deviceId", deviceId);
+  }
+
+  return deviceId;
+}
+
 let totalCaffeine =
   Number(
     localStorage.getItem(
@@ -544,7 +555,8 @@ fetch(
     method: "POST",
     mode: "no-cors",
 body: JSON.stringify({
-  customerId: 1,
+  deviceId: getDeviceId(),
+  customerId: getDeviceId(),
   name: profile.name || "Unknown",
   caffeine: currentCaffeine,
   source: "Website",
