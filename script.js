@@ -1095,6 +1095,28 @@ document
 AUTO LOGIN
 ========================= */
 
+window.onAuthStateChanged(window.auth, user => {
+
+  if (user) {
+    localStorage.setItem("userId", user.uid);
+    localStorage.setItem("userEmail", user.email);
+
+    const profile = localStorage.getItem("userProfile");
+
+    if (profile) {
+      const savedUser = JSON.parse(profile);
+
+      document.getElementById("welcomeName").innerText =
+        `สวัสดี ${savedUser.name} 👋`;
+
+      showScreen("dashboard");
+    } else {
+      showScreen("register");
+    }
+  }
+
+});
+
 window.onload = () => {
 
   const profile =
