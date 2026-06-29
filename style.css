@@ -711,6 +711,6 @@ RESPONSIVE
   padding:18px;
 }
 
-.logout-btn:hover{
-  color:#d60000;
+.logout-btn{
+    margin-top:30px;
 }
