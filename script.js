@@ -537,9 +537,10 @@ fetch(
     method: "POST",
     mode: "no-cors",
 body: JSON.stringify({
+  userId: localStorage.getItem("userId"),
   deviceId: getDeviceId(),
-  customerId: getDeviceId(),
   name: profile.name || "Unknown",
+  email: localStorage.getItem("userEmail"),
   caffeine: currentCaffeine,
   source: "Website",
   time: new Date().toLocaleTimeString("th-TH"),
