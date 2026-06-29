@@ -1179,3 +1179,21 @@ window.onload = () => {
   updateRisk();
 
 };
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+  const confirmLogout =
+    confirm("ต้องการออกจากระบบใช่หรือไม่?");
+
+  if (!confirmLogout) return;
+
+  await window.signOut(window.auth);
+
+  localStorage.removeItem("userId");
+  localStorage.removeItem("userEmail");
+
+  showScreen("welcome");
+
+});
