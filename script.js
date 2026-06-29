@@ -973,11 +973,21 @@ document
     error.innerText = "";
     showScreen("register");
 
-  } catch (err) {
+  } 
+  
+  catch (err) {
   console.error(err);
-  error.innerText = err.code + " : " + err.message;
-}
 
+  if (err.code === "auth/email-already-in-use") {
+    error.innerText = "อีเมลนี้เคยเข้าสู่ระบบแล้ว กรุณากดเข้าสู่ระบบแทน";
+  } else if (err.code === "auth/invalid-email") {
+    error.innerText = "รูปแบบอีเมลไม่ถูกต้อง";
+  } else if (err.code === "auth/weak-password") {
+    error.innerText = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+  } else {
+    error.innerText = "สมัครสมาชิกไม่สำเร็จ กรุณาลองใหม่";
+  }
+}
 });
 
 document
