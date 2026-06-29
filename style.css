@@ -698,3 +698,19 @@ RESPONSIVE
   margin-top:10px;
   min-height:18px;
 }
+
+.logout-btn{
+    width:100%;
+    margin-top:30px;
+    background:transparent;
+    border:none;
+    color:#b23b3b;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    padding:18px;
+}
+
+.logout-btn:hover{
+    color:#d60000;
+}
