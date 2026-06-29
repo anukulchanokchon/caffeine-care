@@ -550,7 +550,7 @@ const profile =
   ) || {};
 
 fetch(
-  "https://script.google.com/macros/s/AKfycbyYw-epTBlDep8qhZ9W9v_-LE1UJyQFEe27d8xbBL8iHy0SR_4ZrvWHnzwJC_wgJmFK/exec",
+  "https://script.google.com/macros/s/AKfycbyYw-epTBlDep8qhZ9W9v_-LE1UJyQFEe27d8xbBL8iHy0SR_4ZrvWHnzwJC_wgJmFK/exechttps://script.google.com/macros/s/AKfycbz4ajOghqDLCsKZ799p7y6PGZ03y3uOk48IgIKuTSoyhOQrghQGXnvbbVwjbFVD7M5c/exec",
   {
     method: "POST",
     mode: "no-cors",
