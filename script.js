@@ -322,18 +322,19 @@ document
   const chatBox =
     document.getElementById("chatBox");
 
-chatBox.innerHTML = "";
+  chatBox.innerHTML = "";
 
-if(aiChatData.length === 0){
-  addMessage(
-    "ai",
-    "👋 สวัสดีค่ะ ฉันคือ Caffeine Care AI\n\nลองถามได้เลย เช่น วันนี้ฉันดื่มกาแฟได้อีกไหม?"
-  );
-} else {
-  aiChatData.forEach(msg => {
-    addMessage(msg.sender, msg.text, false);
-  });
-}
+  if(aiChatData.length === 0){
+    addMessage(
+      "ai",
+      "👋 สวัสดีค่ะ ฉันคือ Caffeine Care AI\n\nลองถามได้เลย เช่น วันนี้ฉันดื่มกาแฟได้อีกไหม?"
+    );
+  } else {
+    aiChatData.forEach(msg => {
+      addMessage(msg.sender, msg.text, false);
+    });
+  }
+
 });
 
 document
