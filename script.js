@@ -1111,6 +1111,7 @@ document
   }
 
   try {
+
     const result =
       await window.signInWithEmailAndPassword(
         window.auth,
@@ -1125,74 +1126,112 @@ document
 
     error.innerText = "";
 
-const profileRef = window.doc(
-  window.db,
-  "users",
-  result.user.uid
-);
+    const profileRef = window.doc(
+      window.db,
+      "users",
+      result.user.uid
+    );
 
-const profileSnap = await window.getDoc(profileRef);
+    const profileSnap =
+      await window.getDoc(profileRef);
 
-if (profileSnap.exists()) {
-  const user = profileSnap.data();
+    if (profileSnap.exists()) {
 
-  localStorage.setItem(
-    "userProfile",
-    JSON.stringify(user)
-  );
+      const user = profileSnap.data();
 
-if (user.lastSavedDate !== today) {
-  totalCaffeine = 0;
-} else {
-  totalCaffeine = user.totalCaffeine || 0;
-}
+      // รีข้อมูลเฉพาะคาเฟอีนเมื่อขึ้นวันใหม่
+      if (user.lastSavedDate !== today) {
 
-historyData = user.history || [];
+        user.totalCaffeine = 0;
 
-  localStorage.setItem("totalCaffeine", totalCaffeine);
-  localStorage.setItem(
-    "caffeineHistory",
-    JSON.stringify(historyData)
-  );
+        // ❌ อย่าล้าง history
+        // user.history = [];
 
-  updateDashboard();
+        await window.setDoc(
+          window.doc(
+            window.db,
+            "users",
+            result.user.uid
+          ),
+          {
+            totalCaffeine: 0,
+            lastSavedDate: today
+          },
+          { merge: true }
+        );
 
-  document.getElementById("welcomeName").innerText =
-    `สวัสดี ${user.name} 👋`;
+      }
 
-  showScreen("dashboard");
+      localStorage.setItem(
+        "userProfile",
+        JSON.stringify(user)
+      );
 
-} else {
-  localStorage.removeItem("userProfile");
-  localStorage.removeItem("totalCaffeine");
-  localStorage.removeItem("caffeineHistory");
+      totalCaffeine =
+        user.totalCaffeine || 0;
 
-  totalCaffeine = 0;
-  historyData = [];
+      historyData =
+        user.history || [];
 
-  updateDashboard();
+      localStorage.setItem(
+        "totalCaffeine",
+        totalCaffeine
+      );
 
-  showScreen("register");
-}
+      localStorage.setItem(
+        "caffeineHistory",
+        JSON.stringify(historyData)
+      );
+
+      updateDashboard();
+
+      document.getElementById("welcomeName").innerText =
+        `สวัสดี ${user.name} 👋`;
+
+      showScreen("dashboard");
+
+    } else {
+
+      localStorage.removeItem("userProfile");
+      localStorage.removeItem("totalCaffeine");
+      localStorage.removeItem("caffeineHistory");
+
+      totalCaffeine = 0;
+      historyData = [];
+
+      updateDashboard();
+
+      showScreen("register");
+
+    }
 
   } catch (err) {
+
     console.error(err);
 
     if (err.code === "auth/invalid-credential") {
+
       loginFailCount++;
 
       if (loginFailCount >= 3) {
+
         error.innerText =
           "กรอกรหัสผ่านผิดมากเกินไป โปรดกดลืมรหัสผ่าน";
+
       } else {
+
         error.innerText =
           "รหัสผ่านไม่ถูกต้อง ลองใหม่อีกครั้ง";
+
       }
 
     } else {
+
       error.innerText =
         "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่";
+
     }
+
   }
 
 });
