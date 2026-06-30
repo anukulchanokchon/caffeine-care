@@ -543,6 +543,7 @@ await window.setDoc(
   {
     totalCaffeine: Number(totalCaffeine),
     history: historyData,
+    lastSavedDate: today,
     updatedAt: new Date().toISOString()
   },
   { merge: true }
@@ -1140,8 +1141,13 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
+if (user.lastSavedDate !== today) {
+  totalCaffeine = 0;
+} else {
   totalCaffeine = user.totalCaffeine || 0;
-  historyData = user.history || [];
+}
+
+historyData = user.history || [];
 
   localStorage.setItem("totalCaffeine", totalCaffeine);
   localStorage.setItem(
@@ -1220,7 +1226,12 @@ if (profileSnap.exists()) {
     JSON.stringify(user)
   );
 
-totalCaffeine = user.totalCaffeine || 0;
+if (user.lastSavedDate !== today) {
+  totalCaffeine = 0;
+} else {
+  totalCaffeine = user.totalCaffeine || 0;
+}
+
 historyData = user.history || [];
 
 localStorage.setItem("totalCaffeine", totalCaffeine);
