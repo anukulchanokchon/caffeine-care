@@ -989,6 +989,22 @@ document
 
 });
 
+document
+.getElementById("aiQuestion")
+.addEventListener("keydown", (event) => {
+
+  if(event.key === "Enter"){
+
+    event.preventDefault();
+
+    document
+    .getElementById("askAI")
+    .click();
+
+  }
+
+});
+
   const question =
     document
     .getElementById(
