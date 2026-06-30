@@ -1201,61 +1201,84 @@ historyData = user.history || [];
 AUTO LOGIN
 ========================= */
 
-window.onAuthStateChanged(window.auth, async user => {
+window.onAuthStateChanged(window.auth, async firebaseUser => {
 
-  if (!user) {
+  if (!firebaseUser) {
     return;
   }
 
-  localStorage.setItem("userId", user.uid);
-  localStorage.setItem("userEmail", user.email);
+  localStorage.setItem("userId", firebaseUser.uid);
+  localStorage.setItem("userEmail", firebaseUser.email);
 
   const profileRef = window.doc(
     window.db,
     "users",
-    user.uid
+    firebaseUser.uid
   );
 
   const profileSnap = await window.getDoc(profileRef);
 
-if (profileSnap.exists()) {
-  const user = profileSnap.data();
+  if (profileSnap.exists()) {
 
-  localStorage.setItem(
-    "userProfile",
-    JSON.stringify(user)
-  );
+    const profile = profileSnap.data();
 
-if (user.lastSavedDate !== today) {
-  totalCaffeine = 0;
-} else {
-  totalCaffeine = user.totalCaffeine || 0;
-}
+    if (profile.lastSavedDate !== today) {
 
-historyData = user.history || [];
+      profile.totalCaffeine = 0;
+      profile.history = [];
 
-localStorage.setItem("totalCaffeine", totalCaffeine);
-localStorage.setItem(
-  "caffeineHistory",
-  JSON.stringify(historyData)
-);
+      await window.setDoc(
+        window.doc(
+          window.db,
+          "users",
+          firebaseUser.uid
+        ),
+        {
+          totalCaffeine: 0,
+          history: [],
+          lastSavedDate: today
+        },
+        { merge: true }
+      );
 
-updateDashboard();
-  
-  document.getElementById("welcomeName").innerText =
-    `สวัสดี ${user.name} 👋`;
+    }
 
-  showScreen("dashboard");
-} else {
-  localStorage.removeItem("userProfile");
-  localStorage.removeItem("totalCaffeine");
-  localStorage.removeItem("caffeineHistory");
+    localStorage.setItem(
+      "userProfile",
+      JSON.stringify(profile)
+    );
 
-  totalCaffeine = 0;
-  historyData = [];
+    totalCaffeine = profile.totalCaffeine || 0;
+    historyData = profile.history || [];
 
-  showScreen("register");
-}
+    localStorage.setItem("totalCaffeine", totalCaffeine);
+
+    localStorage.setItem(
+      "caffeineHistory",
+      JSON.stringify(historyData)
+    );
+
+    updateDashboard();
+
+    document.getElementById("welcomeName").innerText =
+      `สวัสดี ${profile.name} 👋`;
+
+    showScreen("dashboard");
+
+  } else {
+
+    localStorage.removeItem("userProfile");
+    localStorage.removeItem("totalCaffeine");
+    localStorage.removeItem("caffeineHistory");
+
+    totalCaffeine = 0;
+    historyData = [];
+
+    updateDashboard();
+
+    showScreen("register");
+
+  }
 
 });
 
