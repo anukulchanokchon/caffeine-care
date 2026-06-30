@@ -622,20 +622,59 @@ RESULT
 
 
 /* =========================
-AI
+AI CHAT
 ========================= */
 
-#aiAnswer{
+.chat-box{
+  margin-top:16px;
+  padding:14px;
 
-  margin-top:15px;
+  background:white;
+  border-radius:18px;
+  box-shadow:var(--shadow);
 
-  min-height:80px;
-
+  min-height:220px;
+  max-height:360px;
+  overflow-y:auto;
 }
 
-.ai-placeholder{
-  color:#777;
-  text-align:center;
+.chat-message{
+  margin-bottom:14px;
+  padding:12px 14px;
+  border-radius:16px;
+  line-height:1.5;
+  font-size:15px;
+}
+
+.chat-message.user{
+  background:var(--green);
+  color:white;
+  margin-left:40px;
+  text-align:right;
+}
+
+.chat-message.ai{
+  background:#f1f1f1;
+  color:var(--text);
+  margin-right:40px;
+}
+
+.chat-input{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.chat-input input{
+  flex:1;
+}
+
+.chat-input button{
+  width:54px;
+  border-radius:14px;
+  background:var(--green);
+  color:white;
+  font-size:20px;
 }
 
 /* =========================
