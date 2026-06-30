@@ -697,58 +697,80 @@ function saveHistory(){
 function renderHistory(){
 
   const container =
-    document
-    .getElementById(
-      "historyList"
-    );
+    document.getElementById("historyList");
 
   const saved = historyData || [];
 
   container.innerHTML = "";
 
   if(saved.length === 0){
-
     container.innerHTML =
     `
     <div class="card">
       ยังไม่มีประวัติ
     </div>
     `;
-
     return;
-
   }
+
+  const grouped = {};
 
   saved
   .slice()
   .reverse()
   .forEach(item => {
 
+    const dateOnly =
+      item.date.split(" ")[0];
+
+    if(!grouped[dateOnly]){
+      grouped[dateOnly] = [];
+    }
+
+    grouped[dateOnly].push(item);
+
+  });
+
+  Object.keys(grouped).forEach(date => {
+
     container.innerHTML +=
     `
-    <div class="history-item">
-
-      <strong>
-        ${item.drink}
-      </strong>
-
-      <br>
-
-      ${item.caffeine} mg
-
-      <br>
-
-      <small>
-        ${item.date}
-      </small>
-
-    </div>
+    <h3 class="history-date">
+      📅 ${date}
+    </h3>
     `;
+
+    grouped[date].forEach(item => {
+
+      const timeOnly =
+        item.date.split(" ")[1] || "";
+
+      container.innerHTML +=
+      `
+      <div class="history-item">
+
+        <strong>
+          ${item.drink}
+        </strong>
+
+        <br>
+
+        ${item.caffeine} mg
+
+        <br>
+
+        <small>
+          ${timeOnly}
+        </small>
+
+      </div>
+      `;
+
+    });
 
   });
 
 }
-
 
 /* =========================
 AI ASSISTANT
