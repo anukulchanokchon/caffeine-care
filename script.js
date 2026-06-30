@@ -11,7 +11,7 @@ const screens = {
 
   auth:
     document.getElementById("authScreen"),
-
+goAI
   register:
     document.getElementById("register"),
 
@@ -316,6 +316,16 @@ document
   updateAIAdvice();
 
   showScreen("ai");
+
+  const chatBox =
+    document.getElementById("chatBox");
+
+  chatBox.innerHTML = "";
+
+  addMessage(
+    "ai",
+    "👋 สวัสดีค่ะ ฉันคือ Caffeine Care AI\n\nฉันสามารถช่วยตอบคำถามเกี่ยวกับคาเฟอีน วิเคราะห์ข้อมูลการดื่มของคุณ และให้คำแนะนำด้านสุขภาพได้\n\nลองถามได้เลย เช่น\n• วันนี้ฉันดื่มกาแฟได้อีกไหม?\n• คาเฟอีนมีผลต่อการนอนอย่างไร?\n• มัทฉะกับกาแฟ อะไรมีคาเฟอีนมากกว่ากัน?"
+  );
 
 });
 
