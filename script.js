@@ -932,6 +932,63 @@ document
 .getElementById("askAI")
 .addEventListener("click", () => {
 
+  const input =
+    document.getElementById("aiQuestion");
+
+  const question =
+    input.value.trim();
+
+  if(question === ""){
+    return;
+  }
+
+  addMessage("user", question);
+
+  input.value = "";
+
+  const lowerQuestion =
+    question.toLowerCase();
+
+  let answer = "";
+
+  if(
+    lowerQuestion.includes("นอน") ||
+    lowerQuestion.includes("หลับ")
+  ){
+
+    answer =
+      `จากข้อมูลวันนี้ คุณได้รับคาเฟอีนแล้ว ${totalCaffeine} mg\n\nโดยทั่วไปควรหลีกเลี่ยงคาเฟอีนก่อนนอนประมาณ 6 ชั่วโมง เพื่อช่วยลดปัญหานอนไม่หลับค่ะ`;
+
+  } else if(
+    lowerQuestion.includes("กาแฟ")
+  ){
+
+    const remaining =
+      Math.max(400 - totalCaffeine, 0);
+
+    answer =
+      `กาแฟ 1 แก้วโดยเฉลี่ยมีคาเฟอีนประมาณ 95 mg\n\nวันนี้คุณได้รับแล้ว ${totalCaffeine} mg และยังเหลือได้ประมาณ ${remaining} mg จากขีดจำกัด 400 mg ค่ะ`;
+
+  } else if(
+    lowerQuestion.includes("มัทฉะ")
+  ){
+
+    answer =
+      `มัทฉะ 1 แก้วมีคาเฟอีนประมาณ 70 mg\n\nถ้าเทียบกับกาแฟทั่วไป มัทฉะมักมีคาเฟอีนน้อยกว่าเล็กน้อยค่ะ`;
+
+  } else {
+
+    answer =
+      `จากข้อมูลวันนี้ คุณได้รับคาเฟอีนแล้ว ${totalCaffeine} mg\n\nถ้าต้องการให้ฉันวิเคราะห์เพิ่ม ลองถามเช่น “วันนี้ดื่มได้อีกไหม” หรือ “ควรงดคาเฟอีนไหม” ได้เลยค่ะ`;
+
+  }
+
+  setTimeout(() => {
+    addMessage("ai", answer);
+  }, 500);
+
+});
+
   const question =
     document
     .getElementById(
