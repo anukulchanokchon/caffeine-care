@@ -11,7 +11,7 @@ const screens = {
 
   auth:
     document.getElementById("authScreen"),
-goAI
+
   register:
     document.getElementById("register"),
 
@@ -1002,71 +1002,6 @@ document
   }
 
 });
-
-  const question =
-    document
-    .getElementById(
-      "aiQuestion"
-    ).value
-    .toLowerCase();
-
-  const answer =
-    document
-    .getElementById(
-      "aiAnswer"
-    );
-
-  if(question === ""){
-
-    answer.innerHTML =
-    "กรุณาพิมพ์คำถาม";
-
-    return;
-
-  }
-
-  if(
-    question.includes(
-      "นอน"
-    )
-  ){
-
-    answer.innerHTML =
-    "ควรหลีกเลี่ยงคาเฟอีนก่อนนอนอย่างน้อย 6 ชั่วโมง";
-
-  }
-
-  else if(
-    question.includes(
-      "กาแฟ"
-    )
-  ){
-
-    answer.innerHTML =
-    "กาแฟ 1 แก้วโดยเฉลี่ยมีคาเฟอีนประมาณ 95 mg";
-
-  }
-
-  else if(
-    question.includes(
-      "มัทฉะ"
-    )
-  ){
-
-    answer.innerHTML =
-    "มัทฉะ 1 แก้วมีคาเฟอีนประมาณ 70 mg";
-
-  }
-
-  else{
-
-    answer.innerHTML =
-    "AI ยังไม่มีข้อมูลสำหรับคำถามนี้";
-
-  }
-
-});
-
 
 /* =========================
 BACK BUTTONS
