@@ -626,35 +626,39 @@ AI CHAT
 ========================= */
 
 .chat-box{
+  background:transparent;
+  box-shadow:none;
+  padding:0;
   margin-top:16px;
-  padding:14px;
-
-  background:white;
-  border-radius:18px;
-  box-shadow:var(--shadow);
-
-  min-height:220px;
-  max-height:360px;
-  overflow-y:auto;
 }
 
 .chat-message{
-  max-width:80%;
+  display:block;
+  max-width:82%;
   width:fit-content;
+  padding:14px 16px;
+  margin-bottom:14px;
+  border-radius:18px;
+  line-height:1.6;
   word-break:break-word;
   white-space:pre-wrap;
-}
-
-.chat-message.user{
-  margin-left:auto;
-  margin-right:0;
+  box-shadow:var(--shadow);
 }
 
 .chat-message.ai{
-  margin-left:0;
+  background:white;
+  color:var(--text);
   margin-right:auto;
+  margin-left:0;
 }
 
+.chat-message.user{
+  background:var(--green);
+  color:white;
+  margin-left:auto;
+  margin-right:0;
+  text-align:left;
+}
 .chat-input{
   display:flex;
   gap:8px;
