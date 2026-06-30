@@ -635,10 +635,10 @@ AI
 
 
 /* =========================
-HISTORY
+
 ========================= */
 
-#historyList{
+#List{
 
   margin-top:15px;
 
@@ -658,6 +658,12 @@ HISTORY
 
 }
 
+.history-date{
+  margin-top:22px;
+  margin-bottom:10px;
+  color:var(--dark-green);
+  font-size:20px;
+}
 
 /* =========================
 KNOWLEDGE
