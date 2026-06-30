@@ -106,6 +106,8 @@ let historyData =
     )
   ) || [];
 
+let aiChatData =
+  JSON.parse(localStorage.getItem("aiChatData")) || [];
 
 /* =========================
 WELCOME
@@ -320,14 +322,18 @@ document
   const chatBox =
     document.getElementById("chatBox");
 
-  chatBox.innerHTML = "";
+chatBox.innerHTML = "";
 
+if(aiChatData.length === 0){
   addMessage(
     "ai",
-    "👋 สวัสดีค่ะ ฉันคือ Caffeine Care AI\n\nฉันสามารถช่วยตอบคำถามเกี่ยวกับคาเฟอีน วิเคราะห์ข้อมูลการดื่มของคุณ และให้คำแนะนำด้านสุขภาพได้\n\nลองถามได้เลย เช่น\n• วันนี้ฉันดื่มกาแฟได้อีกไหม?\n• คาเฟอีนมีผลต่อการนอนอย่างไร?\n• มัทฉะกับกาแฟ อะไรมีคาเฟอีนมากกว่ากัน?"
+    "👋 สวัสดีค่ะ ฉันคือ Caffeine Care AI\n\nลองถามได้เลย เช่น วันนี้ฉันดื่มกาแฟได้อีกไหม?"
   );
-
-});
+} else {
+  aiChatData.forEach(msg => {
+    addMessage(msg.sender, msg.text, false);
+  });
+}
 
 
 document
@@ -668,7 +674,7 @@ function updateRisk(){
 
 }
 
-function addMessage(sender, text) {
+function addMessage(sender, text, save = true) {
 
   const chatBox =
     document.getElementById("chatBox");
@@ -685,6 +691,15 @@ function addMessage(sender, text) {
 
   chatBox.scrollTop =
     chatBox.scrollHeight;
+
+  if(save){
+    aiChatData.push({ sender, text });
+
+    localStorage.setItem(
+      "aiChatData",
+      JSON.stringify(aiChatData)
+    );
+  }
 
 }
 
@@ -952,9 +967,19 @@ document
   let answer = "";
 
   if(
-    lowerQuestion.includes("นอน") ||
-    lowerQuestion.includes("หลับ")
-  ){
+  lowerQuestion.includes("มัทฉะ") &&
+  lowerQuestion.includes("กาแฟ")
+){
+
+  answer =
+    `โดยทั่วไปกาแฟมีคาเฟอีนมากกว่ามัทฉะค่ะ\n\n☕ กาแฟ 1 แก้ว ประมาณ 95 mg\n🍵 มัทฉะ 1 แก้ว ประมาณ 70 mg\n\nจากข้อมูลวันนี้ คุณได้รับแล้ว ${totalCaffeine} mg`;
+
+}
+  
+else if(
+  lowerQuestion.includes("นอน") ||
+  lowerQuestion.includes("หลับ")
+){
 
     answer =
       `จากข้อมูลวันนี้ คุณได้รับคาเฟอีนแล้ว ${totalCaffeine} mg\n\nโดยทั่วไปควรหลีกเลี่ยงคาเฟอีนก่อนนอนประมาณ 6 ชั่วโมง เพื่อช่วยลดปัญหานอนไม่หลับค่ะ`;
