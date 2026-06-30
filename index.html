@@ -480,34 +480,28 @@ PAGE 6 : AI ASSISTANT
 
   <div class="card">
 
-    <p id="aiAdvice">
-
-      วันนี้ยังไม่มีข้อมูล
-      กรุณาประเมินเครื่องดื่มก่อน
-
-    </p>
+    <p id="aiAdvice"></p>
 
   </div>
 
-  <textarea
-    id="aiQuestion"
-    placeholder="ถาม AI เพิ่มเติม..."></textarea>
+  <div id="chatBox" class="chat-box">
 
-  <button
-    id="askAI"
-    class="primary">
+  </div>
 
-    ส่งคำถาม
+  <div class="chat-input">
 
-  </button>
+    <input
+      id="aiQuestion"
+      type="text"
+      placeholder="พิมพ์คำถามเกี่ยวกับคาเฟอีน...">
 
-<div
-  id="aiAnswer"
-  class="card ai-placeholder">
+    <button id="askAI">
 
-  💬 คำตอบจาก AI จะแสดงตรงนี้
+      ➤
 
-</div>
+    </button>
+
+  </div>
 
   <button
     id="backDashboardAI"
@@ -518,9 +512,6 @@ PAGE 6 : AI ASSISTANT
   </button>
 
 </div>
-
-
-
 <!-- =========================
 PAGE 7 : HISTORY
 ========================= -->
@@ -545,8 +536,6 @@ PAGE 7 : HISTORY
   </button>
 
 </div>
-
-
 
 <!-- =========================
 PAGE 8 : KNOWLEDGE
