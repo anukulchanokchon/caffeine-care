@@ -1,5 +1,5 @@
 /* =========================
-CAFFEINE CARE V3
+CAFFEINE CARE
 ========================= */
 
 console.log("SCRIPT LOADED");
@@ -10,7 +10,7 @@ const screens = {
     document.getElementById("welcome"),
 
   auth:
-    .addEventListener("click", () => {,
+    document.getElementById("authScreen"),
 
   register:
     document.getElementById("register"),
