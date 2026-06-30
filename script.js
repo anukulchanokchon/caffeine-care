@@ -658,6 +658,26 @@ function updateRisk(){
 
 }
 
+function addMessage(sender, text) {
+
+  const chatBox =
+    document.getElementById("chatBox");
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    `chat-message ${sender}`;
+
+  message.innerText = text;
+
+  chatBox.appendChild(message);
+
+  chatBox.scrollTop =
+    chatBox.scrollHeight;
+
+}
+
 /* =========================
 HISTORY
 ========================= */
