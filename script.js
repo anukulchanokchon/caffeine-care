@@ -112,12 +112,10 @@ WELCOME
 ========================= */
 
 document
-.getElementById("goRegister")
-.addEventListener("click", () => {
-
-  showScreen("auth");
-
-});
+  .getElementById("goRegister")
+  .addEventListener("click", () => {
+    showScreen("authScreen");
+  });
 
 /* =========================
 GENDER
