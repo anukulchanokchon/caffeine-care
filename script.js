@@ -334,7 +334,7 @@ if(aiChatData.length === 0){
     addMessage(msg.sender, msg.text, false);
   });
 }
-
+});
 
 document
 .getElementById("goHistory")
