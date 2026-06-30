@@ -10,7 +10,7 @@ const screens = {
     document.getElementById("welcome"),
 
   auth:
-    document.getElementById("authScreen"),
+    .addEventListener("click", () => {,
 
   register:
     document.getElementById("register"),
@@ -112,10 +112,12 @@ WELCOME
 ========================= */
 
 document
-  .getElementById("goRegister")
-  .addEventListener("click", () => {
-    showScreen("authScreen");
-  });
+.getElementById("goRegister")
+.addEventListener("click", () => {
+
+  showScreen("auth");
+
+});
 
 /* =========================
 GENDER
