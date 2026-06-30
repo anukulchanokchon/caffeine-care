@@ -780,74 +780,90 @@ AI ASSISTANT
 function updateAIAdvice(){
 
   const aiAdvice =
-    document
-    .getElementById(
-      "aiAdvice"
-    );
+    document.getElementById("aiAdvice");
 
-  if(totalCaffeine <= 100){
+  const remaining =
+    Math.max(400 - totalCaffeine, 0);
+
+  let lastDrink = "ยังไม่มีข้อมูล";
+  let lastTime = "-";
+
+  if(historyData.length > 0){
+    const latest =
+      historyData[historyData.length - 1];
+
+    lastDrink = latest.drink;
+    lastTime = latest.date;
+  }
+
+  if(totalCaffeine === 0){
 
     aiAdvice.innerHTML =
-
     `
-    วันนี้คุณได้รับ
-    ${totalCaffeine} mg
+    วันนี้คุณยังไม่ได้บันทึกคาเฟอีน
 
     <br><br>
 
-    ✅ อยู่ในระดับต่ำ
+    ✅ เริ่มต้นวันได้ดี
 
     <br>
 
-    สามารถดื่มเพิ่มได้
-    อย่างเหมาะสม
+    หากดื่มคาเฟอีน ควรบันทึกทุกครั้ง
+    เพื่อให้ระบบประเมินได้แม่นยำขึ้น
     `;
 
   }
 
-  else if(
-    totalCaffeine <= 250
-  ){
+  else if(totalCaffeine <= 200){
 
     aiAdvice.innerHTML =
-
     `
-    วันนี้คุณได้รับ
-    ${totalCaffeine} mg
+    วันนี้คุณได้รับคาเฟอีนแล้ว
+    <strong>${totalCaffeine} mg</strong>
 
     <br><br>
 
-    🟢 อยู่ในเกณฑ์ปกติ
+    ✅ ยังอยู่ในระดับค่อนข้างปลอดภัย
 
     <br>
 
-    ควรดื่มน้ำเพิ่ม
-    ระหว่างวัน
+    วันนี้ยังเหลือได้อีกประมาณ
+    <strong>${remaining} mg</strong>
+    จากขีดจำกัด 400 mg
+
+    <br><br>
+
+    เครื่องดื่มล่าสุด:
+    ${lastDrink}
+
+    <br>
+
+    เวลา:
+    ${lastTime}
     `;
 
   }
 
-  else if(
-    totalCaffeine <= 400
-  ){
+  else if(totalCaffeine <= 400){
 
     aiAdvice.innerHTML =
-
     `
-    วันนี้คุณได้รับ
-    ${totalCaffeine} mg
+    วันนี้คุณได้รับคาเฟอีนแล้ว
+    <strong>${totalCaffeine} mg</strong>
 
     <br><br>
 
-    🟡 เริ่มเข้าใกล้
-    ขีดจำกัด
+    🟡 เริ่มเข้าใกล้ขีดจำกัดรายวัน
 
     <br>
 
-    ควรหลีกเลี่ยง
-    คาเฟอีนเพิ่ม
-    ในช่วง 4-6 ชั่วโมง
-    ข้างหน้า
+    วันนี้เหลือได้อีกประมาณ
+    <strong>${remaining} mg</strong>
+
+    <br><br>
+
+    ควรหลีกเลี่ยงคาเฟอีนเพิ่ม
+    โดยเฉพาะช่วงเย็นหรือก่อนนอน
     `;
 
   }
@@ -855,27 +871,28 @@ function updateAIAdvice(){
   else{
 
     aiAdvice.innerHTML =
-
     `
-    วันนี้คุณได้รับ
-    ${totalCaffeine} mg
+    วันนี้คุณได้รับคาเฟอีนแล้ว
+    <strong>${totalCaffeine} mg</strong>
 
     <br><br>
 
-    🔴 เกินปริมาณ
-    ที่แนะนำ
+    🔴 เกินปริมาณที่แนะนำต่อวันแล้ว
 
     <br>
 
-    ควรงดเครื่องดื่ม
-    ที่มีคาเฟอีน
-    เพิ่มเติม
+    แนะนำให้งดคาเฟอีนเพิ่มเติมวันนี้
+    และดื่มน้ำเปล่าให้เพียงพอ
+
+    <br><br>
+
+    หากมีอาการใจสั่น นอนไม่หลับ
+    หรือเวียนหัว ควรพักผ่อนและสังเกตอาการ
     `;
 
   }
 
 }
-
 
 /* =========================
 AI CHAT
